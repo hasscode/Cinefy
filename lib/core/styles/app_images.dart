@@ -4,4 +4,5 @@ class AppImages{
   static const String starsBackgroundImageBlur = 'assets/images/backgroundStarsblur.png';
   static const String logoImage = 'assets/images/logo.png';
   static const String resetPasswordImage = 'assets/images/resetPassword.svg';
+  static const String personImage = 'assets/images/person_image.png';
 }

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:movie_app/movies/domain/entities/credit.dart';
 
 import '../../../../core/utils/enums/request_state_enum.dart';
 import '../../../domain/entities/movie.dart';
@@ -11,8 +12,14 @@ class MovieDetailsState extends Equatable {
   final List<Movie> movieRecommendations;
   final RequestState movieRecommendationsState;
   final String movieRecommendationsMessage;
+  final String movieCreditsMessage;
+  final List<Credit> movieCredits;
+  final RequestState movieCreditsState;
 
   const MovieDetailsState({
+    this.movieCreditsState =RequestState.loading,
+    this.movieCreditsMessage = '',
+    this.movieCredits = const [],
     this.movieDetails = const MovieDetails(
       voteCount: 0,
       backdropPath: '',
@@ -32,7 +39,9 @@ class MovieDetailsState extends Equatable {
   });
 
   MovieDetailsState copyWith({
-
+    String? movieCreditsMessage,
+    List<Credit>? movieCredits,
+    RequestState? movieCreditsState,
     List<Movie>? movieRecommendations,
     RequestState? movieRecommendationsState,
     String? movieRecommendationsMessage,
@@ -48,6 +57,9 @@ class MovieDetailsState extends Equatable {
       movieRecommendations: movieRecommendations ?? this.movieRecommendations,
       movieDetailsMessage: movieDetailsMessage ?? this.movieDetailsMessage,
       movieDetailsRequest: movieDetailsRequest ?? this.movieDetailsRequest,
+      movieCredits: movieCredits ?? this.movieCredits,
+      movieCreditsMessage: movieCreditsMessage ?? this.movieCreditsMessage,
+      movieCreditsState: movieCreditsState ?? this.movieCreditsState
     );
 
   }
@@ -60,5 +72,9 @@ class MovieDetailsState extends Equatable {
     movieRecommendationsState,
     movieDetailsRequest,
     movieDetails,
-    movieDetailsMessage,];
+    movieDetailsMessage,
+  movieCreditsState,
+    movieCredits,
+    movieCreditsMessage
+  ];
 }

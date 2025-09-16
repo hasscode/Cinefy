@@ -11,4 +11,5 @@ class Constants{
   static  String getMovieDetailsPath(int movieID)=> '${baseUrl}movie/${movieID.toString()}?api_key=$apiKey' ;
   static  String getSpecificPagePopularPath(int pageNumber)=> '${baseUrl}movie/popular?api_key=$apiKey&page=$pageNumber' ;
   static  String getSpecificPageTopRatedPath(int pageNumber)=> '${baseUrl}movie/top_rated?api_key=$apiKey&page=$pageNumber' ;
+  static  String getMovieCreditsPath(int movieID)=> '${baseUrl}movie/${movieID.toString()}/credits?api_key=$apiKey' ;
 }

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:movie_app/movies/data/data_source/movies_remote_data_source.dart';
+import 'package:movie_app/movies/domain/entities/credit.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
 import 'package:movie_app/movies/domain/entities/movie_details.dart';
 import 'package:movie_app/movies/domain/repositories/base_movies_repository.dart';
@@ -40,6 +41,12 @@ class MoviesRepository implements BaseMoviesRepository{
   Future<Either<Failures, List<Movie>>> getMovieRecommendations(int movieID) async{
     final  result = await movieBaseRemoteDataSource.getMovieRecommendations(movieID);
     return result;
+  }
+
+  @override
+  Future<Either<Failures, List<Credit>>> getMovieCredits(int movieID) async{
+final result =await movieBaseRemoteDataSource.getMovieCredits(movieID);
+return result;
   }
 
 

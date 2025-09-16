@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/auth/presentation/screens/profile_screen.dart';
+import 'package:movie_app/core/styles/app_images.dart';
 import 'package:page_transition/page_transition.dart';
 class HomeAppBarWidget extends StatelessWidget {
   const HomeAppBarWidget({super.key});
@@ -34,6 +35,8 @@ border: Border.all(color: Color(0xffD10909),width: .7),
           ),
         ),
         Spacer(),
+        // Image.asset(AppImages.logoImage,width: 50,),
+        // Spacer(),
         GestureDetector(
           onTap: (){
             // Navigator.push(context, MaterialPageRoute(builder: (context)=>SizedBox.shrink()));

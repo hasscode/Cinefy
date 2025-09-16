@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/movies/domain/usecase/get_credits_use_case.dart';
 import 'package:movie_app/movies/presentation/controller/movie_details_bloc/movie_details_events.dart';
 import 'package:movie_app/movies/presentation/controller/movie_details_bloc/movie_details_state.dart';
 
@@ -9,9 +10,11 @@ import '../../../domain/usecase/get_movie_recommendation_usecase.dart';
 class MovieDetailsBloc extends Bloc<MovieDetailsEvents,MovieDetailsState>{
   final GetMovieRecommendationUseCase getMovieRecommendation;
   final GetMovieDetailsUseCase getMovieDetails;
-  MovieDetailsBloc(this.getMovieDetails,this.getMovieRecommendation):super (MovieDetailsState()){
+  final GetCreditsUseCase getCreditsUseCase;
+  MovieDetailsBloc(this.getMovieDetails,this.getMovieRecommendation,this.getCreditsUseCase):super (MovieDetailsState()){
     on<GetMovieRecommendations>(_getMovieRecommendations);
     on<GetMovieDetails>(_getMovieDetails);
+    on<GetMovieCredits>(_getMovieCredits);
   }
   Future<void>_getMovieRecommendations(GetMovieRecommendations event ,Emitter<MovieDetailsState> emit)async{
 
@@ -45,6 +48,26 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvents,MovieDetailsState>{
                 movieDetails: movieDetails
             ))
     );
+
+  }
+
+  Future<void>_getMovieCredits(GetMovieCredits event ,Emitter<MovieDetailsState> emit)async{
+
+    final result = await getCreditsUseCase.call(event.movieId);
+    result.fold((failure){
+      emit(
+          state.copyWith(
+              movieCreditsMessage: failure.errMessage,
+              movieCreditsState: RequestState.error
+          )
+      );
+
+    }, (credits){
+      emit(state.copyWith(
+          movieCreditsState: RequestState.success,
+          movieCredits: credits
+      ));
+    });
 
   }
 
