@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "804848892826",
+    "project_id": "cinefy-d5223",
+    "storage_bucket": "cinefy-d5223.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804848892826:android:41c1463a4ed0fe23e2d823",
+        "android_client_info": {
+          "package_name": "com.example.movie_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW-pW650CosXZP0_ovzV7TKPx_WHblUT0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
