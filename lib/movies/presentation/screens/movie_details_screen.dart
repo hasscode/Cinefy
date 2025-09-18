@@ -7,10 +7,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/core/styles/app_images.dart';
 import 'package:movie_app/core/utils/enums/request_state_enum.dart';
 import 'package:movie_app/movies/presentation/controller/movie_details_bloc/movie_details_state.dart';
+import 'package:movie_app/movies/presentation/screens/watch_movie_screen.dart';
 import 'package:movie_app/movies/presentation/widgets/cast_details_item_widget.dart';
 import 'package:movie_app/movies/presentation/widgets/movie_details_widget.dart';
 import 'package:movie_app/movies/presentation/widgets/movie_poster_item_widget.dart';
 import 'package:movie_app/movies/presentation/widgets/movie_recommendations_widget.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/services/services_locator.dart';
@@ -100,7 +102,7 @@ class MovieDetailsScreen extends StatelessWidget {
                       if (state.movieCreditsState ==RequestState.success){
                         return SizedBox(
 
-                          height: 205.h,
+                          height: 130.h,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: state.movieCredits.length,
@@ -122,8 +124,9 @@ class MovieDetailsScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                SliverToBoxAdapter(child: SizedBox(height: 15.h,
-                ),),
+
+
+                SliverToBoxAdapter(child: SizedBox(height: 24.h)),
                 SliverPadding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   sliver: SliverToBoxAdapter(
@@ -143,6 +146,7 @@ class MovieDetailsScreen extends StatelessWidget {
                 ),
 
                 SliverToBoxAdapter(child: SizedBox(height: 20.h)),
+
                 SliverPadding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   sliver: MovieRecommendationsWidget()

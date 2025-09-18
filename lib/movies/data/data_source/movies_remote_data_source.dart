@@ -14,6 +14,7 @@ abstract class MovieBaseRemoteDataSource{
   Future<Either<Failures,List<MovieModel>>>  getMovieRecommendations(int movieID);
   Future<Either<Failures,MovieDetailsModel>>  getMovieDetails(int movieID);
   Future<Either<Failures, List<CreditModel>>>  getMovieCredits(int movieID);
+  Future<Either<Failures, String>>  getMoviePlayer(int movieID);
 
 }
 class MovieRemoteDataSource implements MovieBaseRemoteDataSource {
@@ -141,5 +142,14 @@ class MovieRemoteDataSource implements MovieBaseRemoteDataSource {
       }
       return left(ServerFailure(e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failures, String>> getMoviePlayer(int movieID) async{
+try {
+  return right( Constants.getMoviePlayer(movieID));
+} on Exception catch (e) {
+  return left(ServerFailure(e.toString()));
+}
   }
 }

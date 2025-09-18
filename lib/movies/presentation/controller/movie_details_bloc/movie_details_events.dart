@@ -13,3 +13,7 @@ class GetMovieCredits extends MovieDetailsEvents{
   final int movieId;
   GetMovieCredits(this.movieId);
 }
+class GetMoviePlayer extends MovieDetailsEvents{
+  final int movieId;
+  GetMoviePlayer(this.movieId);
+}

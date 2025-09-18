@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/core/utils/enums/request_state_enum.dart';
 
 import 'package:movie_app/movies/presentation/controller/movie_details_bloc/movie_details_state.dart';
+import 'package:movie_app/movies/presentation/screens/watch_movie_screen.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'package:shimmer/shimmer.dart';
 
@@ -158,6 +160,7 @@ class MovieDetailsWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
+
                         state.movieDetails.title,
                         style: GoogleFonts.poppins(
 
@@ -243,7 +246,35 @@ class MovieDetailsWidget extends StatelessWidget {
                           color: Color(0xff939398),
                         ),
                       ),
-                      SizedBox(height: 30.h),
+                      SizedBox(height: 20.h),
+                      Center(
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                              overlayColor:Colors.white,
+                            backgroundColor: Color(0xffD10909),
+                          ),
+                          onPressed: () {
+                            Navigator.push(context, PageTransition(
+                              type: PageTransitionType.topToBottom, // slideRight, slideLeft, scale, rotate...
+                              duration: const Duration(milliseconds: 300),
+                              child: WatchMovieScreen(movieTitle:state.movieDetails.title ,movieID: state.movieDetails.id,),
+                            ));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.movie_filter_sharp ,color:Colors.white,size: 22.sp,),
+                                SizedBox(width: 5.w,),
+                                Text('Watch Movie Now',style: GoogleFonts.poppins(color: Colors.white,fontSize: 15.5.sp,fontWeight: FontWeight.w600),),
+
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20.h),
 
                     ],
                   ),

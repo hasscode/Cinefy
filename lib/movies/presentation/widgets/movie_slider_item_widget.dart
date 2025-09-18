@@ -83,17 +83,9 @@ final Movie movie;
                       ),
                     ),
                     Spacer(),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, PageTransition(
-                          opaque: true,
-                          type: PageTransitionType.fade, // slideRight, slideLeft, scale, rotate...
-                          duration: const Duration(milliseconds: 200),
-                          child:  MovieDetailsScreen(movieID: movie.id),
-                        ));
-                      },
-                      child: Container(
 
+
+                      Container(
                         height: 60.h,
                         width: 60.w,
                         decoration: BoxDecoration(
@@ -103,10 +95,21 @@ final Movie movie;
 
                         ),
                         child: Center(
-                            child: Icon(Icons.play_arrow_sharp,size: 45.sp,color: Colors.white70,)
+                            child: IconButton(
+                                style: IconButton.styleFrom(
+                                  overlayColor: Color(0xffD10909)
+                                ),
+                                onPressed: (){
+                              Navigator.push(context, PageTransition(
+                                opaque: true,
+                                type: PageTransitionType.fade, // slideRight, slideLeft, scale, rotate...
+                                duration: const Duration(milliseconds: 200),
+                                child:  MovieDetailsScreen(movieID: movie.id),
+                              ));
+                            }, icon: Icon(Icons.play_arrow_sharp,size: 45.sp,color: Colors.white70,))
                         ),
                       ),
-                    ),
+
 
                   ],
                 ),

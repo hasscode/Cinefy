@@ -15,6 +15,7 @@ import 'package:movie_app/movies/data/data_source/movies_remote_data_source.dart
 import 'package:movie_app/movies/data/repositories/movies_repository.dart';
 import 'package:movie_app/movies/domain/usecase/get_credits_use_case.dart';
 import 'package:movie_app/movies/domain/usecase/get_movie_details.dart';
+import 'package:movie_app/movies/domain/usecase/get_movie_player_use_case.dart';
 import 'package:movie_app/movies/domain/usecase/get_movie_recommendation_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_play_now_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_popular_usecase.dart';
@@ -39,7 +40,8 @@ sL.registerFactory(()=>MoviesBloc(
 sL.registerFactory(()=>SignUpCubit(sL<CreateAccountUseCase>()));
 sL.registerFactory(()=>MovieDetailsBloc(sL<GetMovieDetailsUseCase>(),
   sL<GetMovieRecommendationUseCase>(),
-  sL<GetCreditsUseCase>()
+  sL<GetCreditsUseCase>(),
+  sL<GetMoviePlayerUseCase>(),
 ));
 sL.registerFactory(()=>LoginCubit(sL<LoginUseCase>()));
 sL.registerFactory(()=>ResetPasswordCubit(sL<ResetPasswordUseCase>()));
@@ -58,6 +60,7 @@ sL.registerFactory(()=>LogoutCubit(sL<LogoutUseCase>()));
     sL.registerLazySingleton<CheckLoggedUseCase>(()=>CheckLoggedUseCase(sL()));
     sL.registerLazySingleton<LogoutUseCase>(()=>LogoutUseCase(sL()));
     sL.registerLazySingleton<GetCreditsUseCase>(()=>GetCreditsUseCase(sL()));
+    sL.registerLazySingleton<GetMoviePlayerUseCase>(()=>GetMoviePlayerUseCase(sL()));
 
     /// Repository
     sL.registerLazySingleton<BaseMoviesRepository>(() =>

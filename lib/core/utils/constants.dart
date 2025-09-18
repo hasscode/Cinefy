@@ -12,4 +12,5 @@ class Constants{
   static  String getSpecificPagePopularPath(int pageNumber)=> '${baseUrl}movie/popular?api_key=$apiKey&page=$pageNumber' ;
   static  String getSpecificPageTopRatedPath(int pageNumber)=> '${baseUrl}movie/top_rated?api_key=$apiKey&page=$pageNumber' ;
   static  String getMovieCreditsPath(int movieID)=> '${baseUrl}movie/${movieID.toString()}/credits?api_key=$apiKey' ;
+  static  String getMoviePlayer(int movieID)=> 'https://player.vidsrc.co/embed/movie/$movieID' ;
 }

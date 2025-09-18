@@ -50,6 +50,9 @@ dependencies:
   glassmorphism: ^3.0.0
   flutter_svg: ^2.2.0
   page_transition: ^2.2.1
+  webview_flutter: ^4.13.0
+  flutter_inappwebview: ^6.0.0
+  better_player_plus: ^1.0.8
 
 
 

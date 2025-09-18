@@ -15,8 +15,13 @@ class MovieDetailsState extends Equatable {
   final String movieCreditsMessage;
   final List<Credit> movieCredits;
   final RequestState movieCreditsState;
-
+  final RequestState moviePlayerState;
+  final String moviePlayer;
+  final String moviePlayerMessage;
   const MovieDetailsState({
+    this.moviePlayer = '',
+    this.moviePlayerState =RequestState.loading,
+    this.moviePlayerMessage= '',
     this.movieCreditsState =RequestState.loading,
     this.movieCreditsMessage = '',
     this.movieCredits = const [],
@@ -39,6 +44,9 @@ class MovieDetailsState extends Equatable {
   });
 
   MovieDetailsState copyWith({
+    RequestState? moviePlayerState,
+    String? moviePlayer,
+    String? moviePlayerMessage,
     String? movieCreditsMessage,
     List<Credit>? movieCredits,
     RequestState? movieCreditsState,
@@ -59,7 +67,10 @@ class MovieDetailsState extends Equatable {
       movieDetailsRequest: movieDetailsRequest ?? this.movieDetailsRequest,
       movieCredits: movieCredits ?? this.movieCredits,
       movieCreditsMessage: movieCreditsMessage ?? this.movieCreditsMessage,
-      movieCreditsState: movieCreditsState ?? this.movieCreditsState
+      movieCreditsState: movieCreditsState ?? this.movieCreditsState,
+        moviePlayer: moviePlayer ?? this.moviePlayer,
+      moviePlayerMessage: moviePlayerMessage ?? this.moviePlayerMessage,
+      moviePlayerState: moviePlayerState ?? this.moviePlayerState
     );
 
   }
@@ -75,6 +86,9 @@ class MovieDetailsState extends Equatable {
     movieDetailsMessage,
   movieCreditsState,
     movieCredits,
-    movieCreditsMessage
+    movieCreditsMessage,
+    moviePlayerState,
+    moviePlayer,
+    moviePlayerMessage
   ];
 }

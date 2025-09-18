@@ -49,5 +49,10 @@ final result =await movieBaseRemoteDataSource.getMovieCredits(movieID);
 return result;
   }
 
+  @override
+  Future<Either<Failures, String>> getMoviePlayer(int movieID) async{
+    return await movieBaseRemoteDataSource.getMoviePlayer(movieID);
+  }
+
 
 }

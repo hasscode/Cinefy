@@ -12,4 +12,5 @@ abstract class BaseMoviesRepository {
   Future<Either<Failures, MovieDetails>> getMovieDetails(int movieID);
   Future<Either<Failures, List<Movie>>> getMovieRecommendations(int movieID);
   Future<Either<Failures, List<Credit>>> getMovieCredits(int movieID);
+  Future<Either<Failures, String>> getMoviePlayer(int movieID);
 }
