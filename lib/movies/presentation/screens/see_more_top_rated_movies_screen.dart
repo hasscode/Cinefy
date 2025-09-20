@@ -10,8 +10,8 @@ import '../../../core/styles/app_images.dart';
 import '../../../core/utils/enums/request_state_enum.dart';
 import '../controller/movies_bloc/movies_bloc.dart';
 import '../controller/movies_bloc/movies_state.dart';
-import '../widgets/page_number_button_widget.dart';
-import '../widgets/see_more_item_widget.dart';
+import '../../../core/widgets/page_number_button_widget.dart';
+import '../../../core/widgets/movie_info_item_widget.dart';
 class SeeMoreTopRatedMoviesScreen extends StatefulWidget {
   const SeeMoreTopRatedMoviesScreen({super.key,required this.title});
 
@@ -159,7 +159,7 @@ class _SeeMoreTopRatedMoviesScreenState extends State<SeeMoreTopRatedMoviesScree
                               horizontal: 5,
                               vertical: 8,
                             ),
-                            child: SeeMoreItemWidget(
+                            child: MovieInfoItemWidget(
                               movie: state.topRatedMovies[i],
                             ),
                           ),
@@ -195,12 +195,13 @@ class _SeeMoreTopRatedMoviesScreenState extends State<SeeMoreTopRatedMoviesScree
                                       child: PageNumberButtonWidget(
                                         isSelected: (i+1)==currentPage,
                                         onPageSelected: (pn){
+                                          context.read<MoviesBloc>().add(GetTopRatedMovies(pn));
                                           setState(() {
                                             currentPage =pn;
                                           });
                                         },
                                         scrollController: scrollController,
-                                        isPopular: false,
+
                                         pageNumber: i + 1,
                                       ),
                                     ),

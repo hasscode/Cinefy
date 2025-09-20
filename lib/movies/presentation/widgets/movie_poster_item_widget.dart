@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/core/styles/app_images.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
 import 'package:movie_app/movies/presentation/screens/movie_details_screen.dart';
 import 'package:page_transition/page_transition.dart';
@@ -37,7 +38,7 @@ final Movie movie;
 
               width: 120.0.w,
               fit: BoxFit.cover,
-              imageUrl: Constants.imageUrl(movie.backdropPath!),
+              imageUrl:movie.backdropPath!='https://image.tmdb.org/t/p/w500'? Constants.imageUrl(movie.backdropPath!):AppImages.movieImage,
               placeholder: (context, url) => Shimmer.fromColors(
                 baseColor: Colors.grey[850]!,
                 highlightColor: Colors.grey[800]!,

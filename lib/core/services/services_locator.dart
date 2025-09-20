@@ -21,12 +21,17 @@ import 'package:movie_app/movies/domain/usecase/get_play_now_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_popular_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_top_rated_usecase.dart';
 import 'package:movie_app/movies/presentation/controller/movie_details_bloc/movie_details_bloc.dart';
+import 'package:movie_app/search/data/data_source/search_remote_data_source.dart';
+import 'package:movie_app/search/data/repositories/search_repository_impl.dart';
+import 'package:movie_app/search/domain/repositories/search_repository.dart';
+import 'package:movie_app/search/domain/usecase/get_movie_by_search_use_case.dart';
 
 import '../../auth/data/repository/auth_repository.dart';
 import '../../auth/domain/usecase/reset_password_use_case.dart';
 import '../../auth/presentation/controller/logout cubit/logout_cubit.dart';
 import '../../movies/domain/repositories/base_movies_repository.dart';
 import '../../movies/presentation/controller/movies_bloc/movies_bloc.dart';
+import '../../search/presentation/controller/search cubit/search_cubit.dart';
 
 final sL = GetIt.instance;
 class ServiceLocator {
@@ -47,6 +52,7 @@ sL.registerFactory(()=>LoginCubit(sL<LoginUseCase>()));
 sL.registerFactory(()=>ResetPasswordCubit(sL<ResetPasswordUseCase>()));
 sL.registerFactory(()=>CheckLoggedCubit(sL<CheckLoggedUseCase>()));
 sL.registerFactory(()=>LogoutCubit(sL<LogoutUseCase>()));
+sL.registerFactory(()=>SearchCubit(sL<GetMoviesBySearchUseCase>()));
 
     /// UseCase
     sL.registerLazySingleton<GetPlayNowUseCase>(() => GetPlayNowUseCase(sL()));
@@ -61,17 +67,21 @@ sL.registerFactory(()=>LogoutCubit(sL<LogoutUseCase>()));
     sL.registerLazySingleton<LogoutUseCase>(()=>LogoutUseCase(sL()));
     sL.registerLazySingleton<GetCreditsUseCase>(()=>GetCreditsUseCase(sL()));
     sL.registerLazySingleton<GetMoviePlayerUseCase>(()=>GetMoviePlayerUseCase(sL()));
+    sL.registerLazySingleton<GetMoviesBySearchUseCase>(()=>GetMoviesBySearchUseCase(sL<SearchRepository>()));
+
 
     /// Repository
     sL.registerLazySingleton<BaseMoviesRepository>(() =>
         MoviesRepository(sL()));
      sL.registerLazySingleton<AuthBaseRepository>(()=>AuthRepository(sL()));
+     sL.registerLazySingleton<SearchRepository>(()=>SearchRepositoryImpl(sL()));
 
     /// Data Source
     sL.registerLazySingleton<MovieBaseRemoteDataSource>(() =>
         MovieRemoteDataSource(sL()));
-
-    sL.registerLazySingleton<AuthBaseDataSource>(()=>AuthDataSource(sL()));
+sL.registerLazySingleton<SearchRemoteDataSource>(() =>
+    SearchRemoteDataSourceImpl(sL()));
+sL.registerLazySingleton<AuthBaseDataSource>(()=>AuthDataSource(sL()));
 
 
 /// firebase Auth

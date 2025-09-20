@@ -9,8 +9,8 @@ import 'package:movie_app/core/utils/enums/request_state_enum.dart';
 import 'package:movie_app/movies/presentation/controller/movies_bloc/movies_bloc.dart';
 import 'package:movie_app/movies/presentation/controller/movies_bloc/movies_state.dart';
 import 'package:movie_app/movies/presentation/controller/movies_bloc/movies_events.dart';
-import 'package:movie_app/movies/presentation/widgets/page_number_button_widget.dart';
-import 'package:movie_app/movies/presentation/widgets/see_more_item_widget.dart';
+import 'package:movie_app/core/widgets/page_number_button_widget.dart';
+import 'package:movie_app/core/widgets/movie_info_item_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SeeMorePopularMoviesScreen extends StatefulWidget {
@@ -160,7 +160,7 @@ class _SeeMorePopularMoviesScreenState
                               horizontal: 5,
                               vertical: 8,
                             ),
-                            child: SeeMoreItemWidget(
+                            child: MovieInfoItemWidget(
                               movie: state.popularMovies[i],
                             ),
                           ),
@@ -195,13 +195,14 @@ class _SeeMorePopularMoviesScreenState
                                       ),
                                       child: PageNumberButtonWidget(
                                         onPageSelected: (pn) {
+                                          context.read<MoviesBloc>().add(GetPopularMovies(pn));
                                           setState(() {
                                             currentPage = pn;
                                           });
                                         },
                                         isSelected: (i+1)==currentPage,
                                         scrollController: scrollController,
-                                        isPopular: true,
+
                                         pageNumber: i + 1,
                                       ),
                                     ),

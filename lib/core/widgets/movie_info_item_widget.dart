@@ -6,10 +6,11 @@ import 'package:movie_app/movies/presentation/screens/movie_details_screen.dart'
 import 'package:page_transition/page_transition.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../core/utils/constants.dart';
-import '../../domain/entities/movie.dart';
-class SeeMoreItemWidget extends StatelessWidget {
-  const SeeMoreItemWidget({super.key,required this.movie});
+import '../styles/app_images.dart';
+import '../utils/constants.dart';
+import '../../movies/domain/entities/movie.dart';
+class MovieInfoItemWidget extends StatelessWidget {
+  const MovieInfoItemWidget({super.key,required this.movie});
   final Movie movie;
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class SeeMoreItemWidget extends StatelessWidget {
                 width: 90.w,
                 height: 150.h,
                 fit: BoxFit.cover,
-                imageUrl: Constants.imageUrl(movie.backdropPath!),
+                imageUrl: movie.backdropPath!='https://image.tmdb.org/t/p/w500'? Constants.imageUrl(movie.backdropPath!):AppImages.movieImage,
                 placeholder: (context, url) => Shimmer.fromColors(
                   baseColor: Colors.grey[850]!,
                   highlightColor: Colors.grey[800]!,
@@ -62,7 +63,7 @@ class SeeMoreItemWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(movie.title,overflow: TextOverflow.ellipsis,style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xffBFBFBF)),),
+                  Text(movie.title??'',overflow: TextOverflow.ellipsis,style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xffBFBFBF)),),
                   SizedBox(height: 8.h,),
                   Row(children: [
                     Container(

@@ -19,7 +19,7 @@ final TextEditingController textEditingController ;
             color: Color(0xffF8F8F8)
           ),),
         ),
-        SizedBox(height: 10,),
+        SizedBox(height: 10.h,),
         TextFormField(
 
           style: GoogleFonts.poppins(color: Color(0xffF8F8F8),fontSize: 14),
@@ -29,23 +29,23 @@ final TextEditingController textEditingController ;
           decoration: InputDecoration(
             errorStyle:  TextStyle(
     height: 0,
-    fontSize: 12,
+    fontSize: 12.sp,
     color: Colors.red,
     ),
 hintText: hintText,
             hintStyle: TextStyle(color: Colors.white),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.sp),
               borderSide: BorderSide(color: Color(0xffCFCFCF)),
 
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.sp),
               borderSide: BorderSide(color: Color(0xffF8F8F8)),
 
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.sp),
               borderSide: BorderSide(color: Color(0xffCFCFCF)),
 
             )
