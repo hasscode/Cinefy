@@ -100,13 +100,14 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                     ),
                   );
                 } else if (state is LoginSuccess) {
-                  Navigator.pushReplacement(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     PageTransition(
                       type: PageTransitionType.fade, // slideRight, slideLeft, scale, rotate...
                       duration: const Duration(milliseconds: 300),
                       child: HomeScreen(),
                     ),
+                          (route)=> false
                   );
                 }
               },
@@ -123,7 +124,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                       setState(() {
                         BlocProvider.of<LoginCubit>(
                           context,
-                        ).login(emailController.text, passwordController.text);
+                        ).login(emailController.text.trim(), passwordController.text);
                       });
                     }
                   },

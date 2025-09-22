@@ -46,11 +46,13 @@ class LogoutDialogWidget extends StatelessWidget {
                       BlocListener<LogoutCubit,LogoutState>(
                         listener: (context,state){
                           if(state is LogoutSuccess){
-                            Navigator.pushReplacement(context, PageTransition(
+                            Navigator.pushAndRemoveUntil(context, PageTransition(
                               type: PageTransitionType.fade,
                               duration: const Duration(milliseconds: 300),
                               child:LandingPage(),
-                            ));
+                            ),
+                              (route)=> false
+                            );
                           }
                           else if(state is LogoutFailure){
                             ScaffoldMessenger.of(context).showSnackBar(

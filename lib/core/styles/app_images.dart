@@ -6,4 +6,5 @@ class AppImages{
   static const String resetPasswordImage = 'assets/images/resetPassword.svg';
   static const String personImage = 'assets/images/person_image.png';
   static const String movieImage = 'assets/images/movie.jpg';
+  static const String noConnectionImage = 'assets/images/noConnection.png';
 }

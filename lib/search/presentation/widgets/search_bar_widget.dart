@@ -27,7 +27,10 @@ final int currentPage ;
           )),
       controller: textEditingController,
       backgroundColor: MaterialStateProperty.all(Color(0xffF8F8F8)),
-      leading: Icon(CupertinoIcons.search),
+      trailing: [Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Icon(CupertinoIcons.search,color: Color(0xff8A0000),size: 28,),
+      )],
     onChanged: (text) {
     if (text.isNotEmpty) {
     context.read<SearchCubit>().getMoviesBySearch(text,currentPage);

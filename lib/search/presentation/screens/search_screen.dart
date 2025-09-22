@@ -3,13 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/core/styles/app_images.dart';
-import 'package:movie_app/core/widgets/custom_text_form_field.dart';
 import 'package:movie_app/search/presentation/controller/search%20cubit/search_cubit.dart';
 import 'package:movie_app/search/presentation/controller/search%20cubit/search_state.dart';
 import 'package:movie_app/search/presentation/widgets/search_bar_widget.dart';
-
 import '../../../core/services/services_locator.dart';
-import '../../../core/utils/dummy.dart';
 import '../../../core/widgets/page_number_button_widget.dart';
 import '../../../core/widgets/movie_info_item_widget.dart';
 class SearchScreen extends StatefulWidget {

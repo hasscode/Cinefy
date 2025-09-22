@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -128,23 +129,37 @@ class MovieDetailsWidget extends StatelessWidget {
                       Positioned(
                         top: 10.h,
                         left: 10.w,
-                        child: GestureDetector(
-                          onTap: (){
-                            Navigator.pop(context);
-                          },
-                          child: Container(
+                        child: Container(
 
-                            height: 45.h,
-                            width: 45.w,
-                            decoration: BoxDecoration(
-                              backgroundBlendMode: BlendMode.hardLight,
-                              borderRadius: BorderRadius.circular(30)
-                              ,color: Colors.black54,
+                          height: 50.h,
+                          width: 50.w,
+                          decoration: BoxDecoration(
+                            backgroundBlendMode: BlendMode.hardLight,
+                            borderRadius: BorderRadius.circular(30)
+                            ,color: Colors.black54,
 
-                            ),
-                            child: Center(
-                                child: Icon(Icons.arrow_back_ios_new,size: 20.sp,color: Colors.white,)
-                            ),
+                          ),
+                          child: Center(
+                              child:IconButton(onPressed: (){Navigator.pop(context);}, icon:  Icon(Icons.arrow_back_ios_new,size: 22.sp,color: Colors.white,))
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        top: 10.h,
+                        right: 10.w,
+                        child: Container(
+
+                          height: 50.h,
+                          width: 50.w,
+                          decoration: BoxDecoration(
+                            backgroundBlendMode: BlendMode.hardLight,
+                            borderRadius: BorderRadius.circular(30)
+                            ,color: Colors.black54,
+
+                          ),
+                          child: Center(
+                              child:IconButton(onPressed: (){}, icon:  Icon(CupertinoIcons.heart_fill,size: 32.sp,color: Colors.white,))
                           ),
                         ),
                       ),
@@ -208,7 +223,7 @@ class MovieDetailsWidget extends StatelessWidget {
                                 style: GoogleFonts.poppins(
                                   fontSize: 12.5.sp,
 
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                   color: Color(0xffC5C5C5),
                                 ),
                               ),

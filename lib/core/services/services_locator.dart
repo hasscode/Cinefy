@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
@@ -28,7 +29,9 @@ import 'package:movie_app/search/domain/usecase/get_movie_by_search_use_case.dar
 
 import '../../auth/data/repository/auth_repository.dart';
 import '../../auth/domain/usecase/reset_password_use_case.dart';
+import '../../auth/presentation/controller/internet connection checker cubit/internet_connection_cubit.dart';
 import '../../auth/presentation/controller/logout cubit/logout_cubit.dart';
+
 import '../../movies/domain/repositories/base_movies_repository.dart';
 import '../../movies/presentation/controller/movies_bloc/movies_bloc.dart';
 import '../../search/presentation/controller/search cubit/search_cubit.dart';
@@ -53,6 +56,7 @@ sL.registerFactory(()=>ResetPasswordCubit(sL<ResetPasswordUseCase>()));
 sL.registerFactory(()=>CheckLoggedCubit(sL<CheckLoggedUseCase>()));
 sL.registerFactory(()=>LogoutCubit(sL<LogoutUseCase>()));
 sL.registerFactory(()=>SearchCubit(sL<GetMoviesBySearchUseCase>()));
+sL.registerFactory(()=>InternetCubit(sL<Connectivity>()));
 
     /// UseCase
     sL.registerLazySingleton<GetPlayNowUseCase>(() => GetPlayNowUseCase(sL()));
@@ -90,5 +94,9 @@ sL.registerLazySingleton<FirebaseAuth>(()=> FirebaseAuth.instance);
 
     /// Dio
     sL.registerLazySingleton(() => Dio());
+
+    /// connectivity
+
+    sL.registerLazySingleton(() => Connectivity());
   }
 }

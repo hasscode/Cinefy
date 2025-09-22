@@ -81,13 +81,14 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                     ),
                   );
                 } else if (state is SignUpSuccess) {
-                  Navigator.pushReplacement(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     PageTransition(
                       type: PageTransitionType.fade, // slideRight, slideLeft, scale, rotate...
                       duration: const Duration(milliseconds: 300),
                       child: HomeScreen(),
                     ),
+                          (route)=> false
                   );
                 }
               },
@@ -103,9 +104,9 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                   if (formKey.currentState!.validate()) {
                     setState(() {
                       BlocProvider.of<SignUpCubit>(context).createAccount(
-                        emailController.text,
+                        emailController.text.trim(),
                         passwordController.text,
-                        usernameController.text
+                        usernameController.text.trim()
                       );
                     });
                   }

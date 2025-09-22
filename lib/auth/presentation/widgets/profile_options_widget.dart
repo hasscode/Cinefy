@@ -15,7 +15,6 @@ class ProfileOptionsWidget extends StatelessWidget {
     return Column(
       children: [
         Card(
-
           elevation: 2,
           color: Colors.transparent,
           shadowColor: Colors.white30,

@@ -57,7 +57,7 @@ class MovieInfoItemWidget extends StatelessWidget {
               ),
             ),
           ),
-          Flexible(
+          Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 15),
               child: Column(
@@ -111,16 +111,18 @@ class MovieInfoItemWidget extends StatelessWidget {
 
                   ],),
                    SizedBox(height: 15.h,),
-                  Text(
-                    movie.overview,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.poppins(
+                  Expanded(
+                    child: Text(
+                      movie.overview,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.poppins(
 
-                      fontSize: 14.1.sp,
+                        fontSize: 13.1.sp,
 
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xffA7A7AB),
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xffA7A7AB),
+                      ),
                     ),
                   ),
                 ],
