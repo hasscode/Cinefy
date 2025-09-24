@@ -4,16 +4,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie_app/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:movie_app/auth/domain/repository/auth_base_repository.dart';
+import 'package:movie_app/auth/domain/usecase/check_email_verification_use_case.dart';
 import 'package:movie_app/auth/domain/usecase/check_logged_use_case.dart';
 import 'package:movie_app/auth/domain/usecase/create_account_usecase.dart';
+import 'package:movie_app/auth/domain/usecase/delete_account_use_case.dart';
 import 'package:movie_app/auth/domain/usecase/login_usecase.dart';
 import 'package:movie_app/auth/domain/usecase/logout_use_case.dart';
+import 'package:movie_app/auth/domain/usecase/send_email_verification_use_case.dart';
+import 'package:movie_app/auth/presentation/controller/check%20email%20verification%20cubit/check_email_verification_cubit.dart';
 import 'package:movie_app/auth/presentation/controller/check%20logged%20cubit/check_logged_cubit.dart';
+import 'package:movie_app/auth/presentation/controller/delete%20account%20cubit/delete_account_cubit.dart';
 import 'package:movie_app/auth/presentation/controller/login%20cubit/login_cubit.dart';
 import 'package:movie_app/auth/presentation/controller/reset%20password%20cubit/reset_password_cubit.dart';
+import 'package:movie_app/auth/presentation/controller/send%20email%20verification%20cubit/send_email_verification_cubit.dart';
 import 'package:movie_app/auth/presentation/controller/signup%20cubit/sign_up_cubit.dart';
 import 'package:movie_app/movies/data/data_source/movies_remote_data_source.dart';
 import 'package:movie_app/movies/data/repositories/movies_repository.dart';
+import 'package:movie_app/movies/domain/usecase/add_movie_to_favorites_use_case.dart';
 import 'package:movie_app/movies/domain/usecase/get_credits_use_case.dart';
 import 'package:movie_app/movies/domain/usecase/get_movie_details.dart';
 import 'package:movie_app/movies/domain/usecase/get_movie_player_use_case.dart';
@@ -21,6 +28,7 @@ import 'package:movie_app/movies/domain/usecase/get_movie_recommendation_usecase
 import 'package:movie_app/movies/domain/usecase/get_play_now_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_popular_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_top_rated_usecase.dart';
+import 'package:movie_app/movies/presentation/controller/favourit%20cubit/Favorites_cubit.dart';
 import 'package:movie_app/movies/presentation/controller/movie_details_bloc/movie_details_bloc.dart';
 import 'package:movie_app/search/data/data_source/search_remote_data_source.dart';
 import 'package:movie_app/search/data/repositories/search_repository_impl.dart';
@@ -57,6 +65,10 @@ sL.registerFactory(()=>CheckLoggedCubit(sL<CheckLoggedUseCase>()));
 sL.registerFactory(()=>LogoutCubit(sL<LogoutUseCase>()));
 sL.registerFactory(()=>SearchCubit(sL<GetMoviesBySearchUseCase>()));
 sL.registerFactory(()=>InternetCubit(sL<Connectivity>()));
+sL.registerFactory(()=>SendEmailVerificationCubit(sL<SendEmailVerificationUseCase>()));
+sL.registerFactory(()=>CheckEmailVerificationCubit(sL<CheckEmailVerificationUseCase>()));
+sL.registerFactory(()=>DeleteAccountCubit(sL<DeleteAccountUseCase>()));
+sL.registerFactory(()=>FavoritesCubit(sL<AddMovieToFavoritesUseCase>()));
 
     /// UseCase
     sL.registerLazySingleton<GetPlayNowUseCase>(() => GetPlayNowUseCase(sL()));
@@ -72,6 +84,10 @@ sL.registerFactory(()=>InternetCubit(sL<Connectivity>()));
     sL.registerLazySingleton<GetCreditsUseCase>(()=>GetCreditsUseCase(sL()));
     sL.registerLazySingleton<GetMoviePlayerUseCase>(()=>GetMoviePlayerUseCase(sL()));
     sL.registerLazySingleton<GetMoviesBySearchUseCase>(()=>GetMoviesBySearchUseCase(sL<SearchRepository>()));
+    sL.registerLazySingleton<CheckEmailVerificationUseCase>(()=>CheckEmailVerificationUseCase(sL<AuthBaseRepository>()));
+    sL.registerLazySingleton<SendEmailVerificationUseCase>(()=>SendEmailVerificationUseCase(sL<AuthBaseRepository>()));
+    sL.registerLazySingleton<DeleteAccountUseCase>(()=>DeleteAccountUseCase(sL<AuthBaseRepository>()));
+    sL.registerLazySingleton<AddMovieToFavoritesUseCase>(()=>AddMovieToFavoritesUseCase(sL<BaseMoviesRepository>()));
 
 
     /// Repository

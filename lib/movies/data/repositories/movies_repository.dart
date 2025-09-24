@@ -54,5 +54,10 @@ return result;
     return await movieBaseRemoteDataSource.getMoviePlayer(movieID);
   }
 
+  @override
+  Future<Either<Failures, Unit>> addToFavourites(int movieID, String movieName, String moviePoster) async{
+  return await movieBaseRemoteDataSource.addToFavourites(movieID, movieName, moviePoster);
+  }
+
 
 }

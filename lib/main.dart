@@ -1,14 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/auth/presentation/controller/delete%20account%20cubit/delete_account_cubit.dart';
+import 'package:movie_app/movies/presentation/controller/favourit%20cubit/Favorites_cubit.dart';
 import 'package:movie_app/splash/presentation/screens/no_connection_screen.dart';
 import 'package:movie_app/splash/presentation/screens/splash_screen.dart';
-
+import 'auth/presentation/controller/check email verification cubit/check_email_verification_cubit.dart';
 import 'auth/presentation/controller/check logged cubit/check_logged_cubit.dart';
 import 'auth/presentation/controller/internet connection checker cubit/internet_connection_cubit.dart';
 import 'auth/presentation/controller/internet connection checker cubit/internet_connection_state.dart';
+import 'auth/presentation/controller/send email verification cubit/send_email_verification_cubit.dart';
 import 'core/services/services_locator.dart';
 import 'firebase_options.dart';
 
@@ -38,6 +40,11 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => sL<InternetCubit>()),
           BlocProvider(create: (_) => CheckLoggedCubit(sL())),
+          BlocProvider(create: (context) => sL<CheckEmailVerificationCubit>()),
+          BlocProvider(create: (context) => sL<SendEmailVerificationCubit>()),
+          BlocProvider(create: (context) => sL<DeleteAccountCubit>()),
+          BlocProvider(create: (context) => sL<FavoritesCubit>()),
+
         ],
         child:BlocListener<InternetCubit, InternetConnectionState>(
           listener: (context, state) {

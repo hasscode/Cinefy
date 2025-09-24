@@ -56,7 +56,7 @@ backgroundColor: Colors.black,
           ),
           Positioned(
             bottom: 90.h,
-            left: 35.w,
+            left: 45.w,
             child: FadeIn(
               delay: Duration(milliseconds: 1200),
               child: Column(

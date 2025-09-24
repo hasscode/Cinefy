@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/auth/presentation/screens/login_screen.dart';
+import 'package:movie_app/auth/presentation/screens/verify_your_email_screen.dart';
 import 'package:movie_app/core/widgets/custom_button_widget.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
@@ -81,14 +82,14 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                     ),
                   );
                 } else if (state is SignUpSuccess) {
-                  Navigator.pushAndRemoveUntil(
+                  Navigator.push(
                     context,
                     PageTransition(
                       type: PageTransitionType.fade, // slideRight, slideLeft, scale, rotate...
                       duration: const Duration(milliseconds: 300),
-                      child: HomeScreen(),
+                      child: VerifyYourEmailScreen(),
                     ),
-                          (route)=> false
+
                   );
                 }
               },

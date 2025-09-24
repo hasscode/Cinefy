@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text('Profile',style: GoogleFonts.poppins(fontSize: 20.sp,fontWeight: FontWeight.w600,color: Colors.white),),
+          title: Text('Your Profile',style: GoogleFonts.poppins(fontSize: 20.sp,fontWeight: FontWeight.w600,color: Colors.white),),
           centerTitle: true,
           leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
         ),
@@ -48,6 +48,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         child: Center(child: IconButton(onPressed: (){}, icon: Icon(Icons.person,size: 70.sp,color: Colors.white54,))),
                       ),
+                      SizedBox(height: 6.h,),
                       Text(state.user.username,style: GoogleFonts.poppins(fontSize: 22.sp,fontWeight: FontWeight.w600,color: Colors.white),) ,
                       SizedBox(height: 10.h,),
                       Text(state.user.email,style: GoogleFonts.poppins(fontSize: 12.sp,fontWeight: FontWeight.w400,color: Colors.white),),

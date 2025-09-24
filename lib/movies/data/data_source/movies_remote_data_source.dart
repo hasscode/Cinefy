@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:movie_app/core/error%20handling/failures.dart';
 import 'package:movie_app/core/utils/constants.dart';
 import 'package:movie_app/movies/data/models/credit_model.dart';
@@ -15,11 +18,13 @@ abstract class MovieBaseRemoteDataSource{
   Future<Either<Failures,MovieDetailsModel>>  getMovieDetails(int movieID);
   Future<Either<Failures, List<CreditModel>>>  getMovieCredits(int movieID);
   Future<Either<Failures, String>>  getMoviePlayer(int movieID);
+  Future<Either<Failures, Unit>>  addToFavourites(int movieID,String movieName,String moviePoster);
 
 }
 class MovieRemoteDataSource implements MovieBaseRemoteDataSource {
   Dio dio;
 
+final CollectionReference usersCollection = FirebaseFirestore.instance.collection('Users');
   MovieRemoteDataSource(this.dio);
 
   @override
@@ -151,5 +156,22 @@ try {
 } on Exception catch (e) {
   return left(ServerFailure(e.toString()));
 }
+  }
+
+  @override
+  Future<Either<Failures, Unit>> addToFavourites(int movieID,String movieName,String moviePoster) async{
+    try {
+      final String userId =  FirebaseAuth.instance.currentUser!.uid;
+      final result = await usersCollection.doc(userId).collection('favorites').add(
+          {
+            'movieID': movieID,
+            'movieName': movieName,
+            'moviePoster': moviePoster,
+
+          });
+      return right(unit);
+    } on Exception catch (e) {
+      return left(ServerFailure(e.toString()));
+    }
   }
 }

@@ -35,4 +35,19 @@ return await authBaseDataSource.checkLogged();
   Future<Either<Failures, Unit>> logout() async{
    return await authBaseDataSource.logout();
   }
+
+  @override
+  Future<Either<Failures, bool>> checkVerification() async{
+return await authBaseDataSource.checkVerification();
+  }
+
+  @override
+  Future<Either<Failures, Unit>> sendEmailVerification() async{
+return await authBaseDataSource.sendEmailVerification();
+  }
+
+  @override
+  Future<Either<Failures, Unit>> deleteAccount() async{
+    return await authBaseDataSource.deleteAccount();
+  }
 }

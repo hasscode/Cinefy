@@ -22,32 +22,33 @@ class CustomButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-       shape: RoundedRectangleBorder(
-         borderRadius: BorderRadius.circular(15)
-       ),
-color: colorButton,
-        elevation: 10,
-        shadowColor: colorButton,
-        child: Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
+    return SizedBox(
 
-            borderRadius: BorderRadius.circular(15.sp),
-            color: colorButton,
+      width: width,
+      height:height,
+      child: ElevatedButton(
+
+        style: ElevatedButton.styleFrom(
+          overlayColor: colorButton,
+          elevation: 12,
+          shadowColor: colorButton,
+          backgroundColor: colorButton,
+          shape: RoundedRectangleBorder(
+
+              borderRadius: BorderRadius.circular(15.r)
           ),
-          child: Center(
-            child: Text(
+        ),
+        onPressed: onTap,
+        child:Center(
+          child: Text(
+
               title,
               style: GoogleFonts.poppins(
+
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w700,
                 color: colorText,
               )
-            ),
           ),
         ),
       ),

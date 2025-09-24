@@ -14,6 +14,8 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/utils/constants.dart';
+import '../controller/favourit cubit/Favorites_cubit.dart';
+import '../controller/favourit cubit/Favorites_state.dart';
 import '../controller/movie_details_bloc/movie_details_bloc.dart';
 
 class MovieDetailsWidget extends StatelessWidget {
@@ -21,10 +23,11 @@ class MovieDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieDetailsBloc,MovieDetailsState>(
-      buildWhen: (previous,current)=> previous.movieDetailsRequest !=current.movieDetailsRequest,
-      builder: (context,state){
-        if(state.movieDetailsRequest == RequestState.loading){
+    return BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+      buildWhen: (previous, current) =>
+          previous.movieDetailsRequest != current.movieDetailsRequest,
+      builder: (context, state) {
+        if (state.movieDetailsRequest == RequestState.loading) {
           return FadeIn(
             duration: Duration(milliseconds: 500),
             child: Column(
@@ -109,10 +112,7 @@ class MovieDetailsWidget extends StatelessWidget {
               ],
             ),
           );
-
-        }
-        else if (state.movieDetailsRequest == RequestState.success){
-
+        } else if (state.movieDetailsRequest == RequestState.success) {
           return Column(
             children: [
               FadeIn(
@@ -121,26 +121,35 @@ class MovieDetailsWidget extends StatelessWidget {
                   width: double.infinity,
                   height: 220.h,
                   child: Stack(
-                    children:[
+                    children: [
                       CachedNetworkImage(
-                      imageUrl: Constants.imageUrl(state.movieDetails.backdropPath),
-                      fit: BoxFit.cover,
-                    ),
+                        imageUrl: Constants.imageUrl(
+                          state.movieDetails.backdropPath,
+                        ),
+                        fit: BoxFit.cover,
+                      ),
                       Positioned(
                         top: 10.h,
                         left: 10.w,
                         child: Container(
-
                           height: 50.h,
                           width: 50.w,
                           decoration: BoxDecoration(
                             backgroundBlendMode: BlendMode.hardLight,
-                            borderRadius: BorderRadius.circular(30)
-                            ,color: Colors.black54,
-
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.black54,
                           ),
                           child: Center(
-                              child:IconButton(onPressed: (){Navigator.pop(context);}, icon:  Icon(Icons.arrow_back_ios_new,size: 22.sp,color: Colors.white,))
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.arrow_back_ios_new,
+                                size: 22.sp,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -149,36 +158,46 @@ class MovieDetailsWidget extends StatelessWidget {
                         top: 10.h,
                         right: 10.w,
                         child: Container(
-
                           height: 50.h,
                           width: 50.w,
                           decoration: BoxDecoration(
                             backgroundBlendMode: BlendMode.hardLight,
-                            borderRadius: BorderRadius.circular(30)
-                            ,color: Colors.black54,
-
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.black54,
                           ),
-                          child: Center(
-                              child:IconButton(onPressed: (){}, icon:  Icon(CupertinoIcons.heart_fill,size: 32.sp,color: Colors.white,))
-                          ),
+                          // child: Center(
+                          //   child: BlocBuilder<FavoritesCubit,FavoritesState>(
+                          //     builder:(context,state){
+                          //       if(state is AddFavoritesSuccess){
+                          //         return IconButton(
+                          //           onPressed: () {},
+                          //           icon: Icon(
+                          //             CupertinoIcons.heart_fill,
+                          //             size: 32.sp,
+                          //             color: Colors.white,
+                          //           ),
+                          //         ),
+                          //       }
+                          //     }
+                          //   ),
+                          // ),
                         ),
                       ),
-                  ]),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: FadeIn(
-                  duration:  Duration(milliseconds: 700),
+                  duration: Duration(milliseconds: 700),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-
                         state.movieDetails.title,
                         style: GoogleFonts.poppins(
-
                           fontSize: 20.sp,
                           color: Color(0xffCECED0),
                           fontWeight: FontWeight.bold,
@@ -199,7 +218,10 @@ class MovieDetailsWidget extends StatelessWidget {
                                 vertical: 4,
                               ),
                               child: Text(
-                                (state.movieDetails.releaseDate).substring(0,4),
+                                (state.movieDetails.releaseDate).substring(
+                                  0,
+                                  4,
+                                ),
                                 style: GoogleFonts.poppins(
                                   fontSize: 12.5.sp,
 
@@ -219,7 +241,7 @@ class MovieDetailsWidget extends StatelessWidget {
                               ),
                               SizedBox(width: 5.w),
                               Text(
-                             '${(state.movieDetails.voteAverage.toString()).substring(0,3)} (${state.movieDetails.voteCount})',
+                                '${(state.movieDetails.voteAverage.toString()).substring(0, 3)} (${state.movieDetails.voteCount})',
                                 style: GoogleFonts.poppins(
                                   fontSize: 12.5.sp,
 
@@ -253,7 +275,7 @@ class MovieDetailsWidget extends StatelessWidget {
                       ),
                       SizedBox(height: 15.h),
                       Text(
-                          'Genres: ${state.movieDetails.genres.map((g) => g.name).join(', ')}',
+                        'Genres: ${state.movieDetails.genres.map((g) => g.name).join(', ')}',
                         style: GoogleFonts.poppins(
                           fontSize: 11.5.sp,
 
@@ -265,46 +287,64 @@ class MovieDetailsWidget extends StatelessWidget {
                       Center(
                         child: TextButton(
                           style: TextButton.styleFrom(
-                              overlayColor:Colors.white,
+                            overlayColor: Colors.white,
                             backgroundColor: Color(0xffD10909),
                           ),
                           onPressed: () {
-                            Navigator.push(context, PageTransition(
-                              type: PageTransitionType.topToBottom, // slideRight, slideLeft, scale, rotate...
-                              duration: const Duration(milliseconds: 300),
-                              child: WatchMovieScreen(movieTitle:state.movieDetails.title ,movieID: state.movieDetails.id,),
-                            ));
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType
+                                    .topToBottom, // slideRight, slideLeft, scale, rotate...
+                                duration: const Duration(milliseconds: 300),
+                                child: WatchMovieScreen(
+                                  movieTitle: state.movieDetails.title,
+                                  movieID: state.movieDetails.id,
+                                ),
+                              ),
+                            );
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(Icons.movie_filter_sharp ,color:Colors.white,size: 22.sp,),
-                                SizedBox(width: 5.w,),
-                                Text('Watch Movie Now',style: GoogleFonts.poppins(color: Colors.white,fontSize: 15.5.sp,fontWeight: FontWeight.w600),),
-
+                                Icon(
+                                  Icons.movie_filter_sharp,
+                                  color: Colors.white,
+                                  size: 22.sp,
+                                ),
+                                SizedBox(width: 5.w),
+                                Text(
+                                  'Watch Movie Now',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 15.5.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ),
                       ),
                       SizedBox(height: 20.h),
-
                     ],
                   ),
                 ),
               ),
-
-
             ],
           );
-        }
-        else if (state.movieDetailsRequest ==RequestState.error){
-          return Center(child: Text(state.movieDetailsMessage,style: TextStyle(color: Colors.red),));
+        } else if (state.movieDetailsRequest == RequestState.error) {
+          return Center(
+            child: Text(
+              state.movieDetailsMessage,
+              style: TextStyle(color: Colors.red),
+            ),
+          );
         }
         return Text('Movie Details');
-      }
+      },
     );
   }
 }
