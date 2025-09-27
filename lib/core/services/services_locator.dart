@@ -22,12 +22,14 @@ import 'package:movie_app/movies/data/data_source/movies_remote_data_source.dart
 import 'package:movie_app/movies/data/repositories/movies_repository.dart';
 import 'package:movie_app/movies/domain/usecase/add_movie_to_favorites_use_case.dart';
 import 'package:movie_app/movies/domain/usecase/get_credits_use_case.dart';
+import 'package:movie_app/movies/domain/usecase/get_favorite_movies_use_case.dart';
 import 'package:movie_app/movies/domain/usecase/get_movie_details.dart';
 import 'package:movie_app/movies/domain/usecase/get_movie_player_use_case.dart';
 import 'package:movie_app/movies/domain/usecase/get_movie_recommendation_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_play_now_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_popular_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_top_rated_usecase.dart';
+import 'package:movie_app/movies/domain/usecase/is_exist_in_favorites_use_case.dart';
 import 'package:movie_app/movies/presentation/controller/favourit%20cubit/Favorites_cubit.dart';
 import 'package:movie_app/movies/presentation/controller/movie_details_bloc/movie_details_bloc.dart';
 import 'package:movie_app/search/data/data_source/search_remote_data_source.dart';
@@ -41,6 +43,7 @@ import '../../auth/presentation/controller/internet connection checker cubit/int
 import '../../auth/presentation/controller/logout cubit/logout_cubit.dart';
 
 import '../../movies/domain/repositories/base_movies_repository.dart';
+import '../../movies/domain/usecase/remove_movie_from_favorites_use_case.dart';
 import '../../movies/presentation/controller/movies_bloc/movies_bloc.dart';
 import '../../search/presentation/controller/search cubit/search_cubit.dart';
 
@@ -68,7 +71,7 @@ sL.registerFactory(()=>InternetCubit(sL<Connectivity>()));
 sL.registerFactory(()=>SendEmailVerificationCubit(sL<SendEmailVerificationUseCase>()));
 sL.registerFactory(()=>CheckEmailVerificationCubit(sL<CheckEmailVerificationUseCase>()));
 sL.registerFactory(()=>DeleteAccountCubit(sL<DeleteAccountUseCase>()));
-sL.registerFactory(()=>FavoritesCubit(sL<AddMovieToFavoritesUseCase>()));
+sL.registerFactory(()=>FavoritesCubit(sL<AddMovieToFavoritesUseCase>(),sL<RemoveMovieFromFavoritesUseCase>(),sL<IsExistInFavoritesUseCase>(),sL<GetFavoriteMoviesUseCase>()));
 
     /// UseCase
     sL.registerLazySingleton<GetPlayNowUseCase>(() => GetPlayNowUseCase(sL()));
@@ -88,6 +91,9 @@ sL.registerFactory(()=>FavoritesCubit(sL<AddMovieToFavoritesUseCase>()));
     sL.registerLazySingleton<SendEmailVerificationUseCase>(()=>SendEmailVerificationUseCase(sL<AuthBaseRepository>()));
     sL.registerLazySingleton<DeleteAccountUseCase>(()=>DeleteAccountUseCase(sL<AuthBaseRepository>()));
     sL.registerLazySingleton<AddMovieToFavoritesUseCase>(()=>AddMovieToFavoritesUseCase(sL<BaseMoviesRepository>()));
+    sL.registerLazySingleton<RemoveMovieFromFavoritesUseCase>(()=>RemoveMovieFromFavoritesUseCase(sL<BaseMoviesRepository>()));
+    sL.registerLazySingleton<IsExistInFavoritesUseCase>(()=>IsExistInFavoritesUseCase(sL<BaseMoviesRepository>()));
+    sL.registerLazySingleton<GetFavoriteMoviesUseCase>(()=>GetFavoriteMoviesUseCase(sL<BaseMoviesRepository>()));
 
 
     /// Repository

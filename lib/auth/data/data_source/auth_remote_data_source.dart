@@ -95,13 +95,20 @@ class AuthDataSource implements AuthBaseDataSource{
   }
 
   @override
-  Future<Either<Failures,bool>> checkVerification() async{
+  Future<Either<Failures, bool>> checkVerification() async {
     try {
-      await firebaseAuth.currentUser?.reload();
-      final result =  firebaseAuth.currentUser!.emailVerified;
+      final user = firebaseAuth.currentUser;
+      if (user == null) {
+        return left(ServerFailure("No user logged in"));
+      }
+
+      await user.reload();
+      final result = user.emailVerified;
       return right(result);
     } on FirebaseAuthException catch (e) {
       return left(ServerFailure.fromFirebaseAuth(e));
+    } catch (e) {
+      return left(ServerFailure(e.toString()));
     }
   }
 

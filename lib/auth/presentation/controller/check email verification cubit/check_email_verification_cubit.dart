@@ -10,10 +10,13 @@ class CheckEmailVerificationCubit extends Cubit<CheckEmailVerificationState> {
   CheckEmailVerificationCubit(this.checkEmailVerificationUseCase)
       : super(InitialState());
 
+  void resetState() {
+    emit(InitialState());
+  }
 
   void startChecking() {
     _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 4), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
       checkVerification();
     });
   }

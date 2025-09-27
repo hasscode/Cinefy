@@ -17,6 +17,7 @@ import '../../../core/utils/constants.dart';
 import '../controller/favourit cubit/Favorites_cubit.dart';
 import '../controller/favourit cubit/Favorites_state.dart';
 import '../controller/movie_details_bloc/movie_details_bloc.dart';
+import 'favorite_movies_screen.dart';
 
 class MovieDetailsWidget extends StatelessWidget {
   const MovieDetailsWidget({super.key});
@@ -113,6 +114,7 @@ class MovieDetailsWidget extends StatelessWidget {
             ),
           );
         } else if (state.movieDetailsRequest == RequestState.success) {
+          final movieDetails = state.movieDetails;
           return Column(
             children: [
               FadeIn(
@@ -165,22 +167,125 @@ class MovieDetailsWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30),
                             color: Colors.black54,
                           ),
-                          // child: Center(
-                          //   child: BlocBuilder<FavoritesCubit,FavoritesState>(
-                          //     builder:(context,state){
-                          //       if(state is AddFavoritesSuccess){
-                          //         return IconButton(
-                          //           onPressed: () {},
-                          //           icon: Icon(
-                          //             CupertinoIcons.heart_fill,
-                          //             size: 32.sp,
-                          //             color: Colors.white,
-                          //           ),
-                          //         ),
-                          //       }
-                          //     }
-                          //   ),
-                          // ),
+                          child: Center(
+                            child: BlocConsumer<FavoritesCubit, FavoritesState>(
+                              listener: (context, state) {
+                                if (state is AddFavoritesSuccess) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Colors.black,
+                                      content: Text(
+                                        'Add ${movieDetails.title} to your favorites',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      action: SnackBarAction(
+                                        label: "View",
+                                        textColor: Color(0xffD10909),
+                                        onPressed: () {
+
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) =>
+                                                  FavoriteMoviesScreen(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                } else if (state is AddFavoritesFailure) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Colors.red,
+                                      content: Text(
+                                        state.message,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                } else if (state is DeleteFavoritesFailure) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Colors.red,
+                                      content: Text(
+                                        state.message,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                } else if (state is DeleteFavoritesSuccess) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Colors.black,
+                                      content: Text(
+                                        'Remove ${movieDetails.title} From your favorites',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
+                              builder: (context, state) {
+                                return BlocBuilder<
+                                  FavoritesCubit,
+                                  FavoritesState
+                                >(
+                                  builder: (context, state) {
+                                    bool isFavorite = false;
+                                    if (state is MovieExist) {
+                                      isFavorite = true;
+                                    } else if (state is MovieNotExist) {
+                                      isFavorite = false;
+                                    }
+
+                                    return IconButton(
+                                      onPressed: () {
+                                        if (isFavorite) {
+                                          BlocProvider.of<FavoritesCubit>(
+                                            context,
+                                          ).removeFromFavourites(
+                                            movieDetails.id,
+                                          );
+                                        } else {
+                                          BlocProvider.of<FavoritesCubit>(
+                                            context,
+                                          ).addMovieToFavorites(
+                                            movieDetails.id,
+                                            movieDetails.title,
+                                            movieDetails.backdropPath,
+                                          );
+                                        }
+                                      },
+                                      icon: Icon(
+                                        CupertinoIcons.heart_fill,
+                                        size: 32.sp,
+                                        color: isFavorite
+                                            ? Colors.red
+                                            : Colors.white,
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
                         ),
                       ),
                     ],

@@ -34,12 +34,12 @@ class _SeeMorePopularMoviesScreenState
       create: (context) => sL<MoviesBloc>()..add(GetPopularMovies(1)),
       child: Scaffold(
         appBar: AppBar(
-          elevation: 10,
+          elevation: 0,
           backgroundColor: Colors.black,
           title: Text(
             widget.title,
             style: GoogleFonts.poppins(
-              fontSize: 16.5,
+              fontSize: 17.5.sp,
               fontWeight: FontWeight.bold,
               color: const Color(0xffBFBFBF),
             ),

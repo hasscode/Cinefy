@@ -22,8 +22,8 @@ class HomeAppBarWidget extends StatelessWidget {
           },
           child: Container(
 
-            height: 45.h,
-            width: 45.w,
+            height: 50.h,
+            width: 50.w,
             decoration: BoxDecoration(
 border: Border.all(color: Color(0xffD10909),width: .7),
               borderRadius: BorderRadius.circular(50)
@@ -31,21 +31,16 @@ border: Border.all(color: Color(0xffD10909),width: .7),
 
             ),
             child: Center(
-                child: Icon(Icons.person,size: 25.sp,color: Colors.white70,)
+                child: Icon(Icons.person,size: 28.sp,color: Colors.white70,)
             ),
           ),
         ),
         Spacer(),
         // Image.asset(AppImages.logoImage,width: 50,),
         // Spacer(),
-        GestureDetector(
-          onTap: (){
-            // Navigator.push(context, MaterialPageRoute(builder: (context)=>SizedBox.shrink()));
-          },
-          child: Container(
-
-            height: 45.h,
-            width: 45.w,
+       Container(
+            height: 50.h,
+            width: 50.w,
             decoration: BoxDecoration(
               backgroundBlendMode: BlendMode.hardLight,
               borderRadius: BorderRadius.circular(50)
@@ -59,10 +54,10 @@ border: Border.all(color: Color(0xffD10909),width: .7),
                     duration: const Duration(milliseconds: 300),
                     child: const SearchScreen(),
                   ),);
-                }, icon: Icon(CupertinoIcons.search,size: 25.sp,color: Colors.white70,))
+                }, icon: Icon(CupertinoIcons.search,size: 27.sp,color: Colors.white70,))
             ),
           ),
-        ),
+
       ],
     );
   }

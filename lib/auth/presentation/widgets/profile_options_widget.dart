@@ -6,6 +6,7 @@ import 'package:movie_app/auth/presentation/controller/logout%20cubit/logout_cub
 import 'package:movie_app/auth/presentation/controller/logout%20cubit/logout_state.dart';
 import 'package:movie_app/auth/presentation/screens/landing_page.dart';
 import 'package:movie_app/auth/presentation/widgets/logout_dialog_widget.dart';
+import 'package:movie_app/movies/presentation/widgets/favorite_movies_screen.dart';
 import 'package:page_transition/page_transition.dart';
 class ProfileOptionsWidget extends StatelessWidget {
   const ProfileOptionsWidget({super.key});
@@ -21,7 +22,9 @@ class ProfileOptionsWidget extends StatelessWidget {
           child: ListTile(
             leading: Icon(Icons.favorite_sharp,color: Color(0xffD10909),size: 22,),
             title: Text('Favorites',style: GoogleFonts.poppins(fontSize: 17.sp,fontWeight: FontWeight.w400,color: Colors.white),),
-            trailing: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_sharp,color: Colors.white,size: 22,)),
+            trailing: IconButton(onPressed: (){
+              Navigator.push(context, PageTransition(type: PageTransitionType.bottomToTop,duration: Duration(milliseconds: 300),child: FavoriteMoviesScreen()),);
+            }, icon: Icon(Icons.arrow_forward_ios_sharp,color: Colors.white,size: 22,)),
           ),
         ),
         Card(

@@ -26,13 +26,14 @@ class VerifyYourEmailScreen extends StatefulWidget {
 
 class _VerifyYourEmailScreenState extends State<VerifyYourEmailScreen>
     with WidgetsBindingObserver {
-  Timer? timer;
+
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    
+
+      context.read<CheckEmailVerificationCubit>().resetState();
       context.read<CheckEmailVerificationCubit>().startChecking();
 
   }
@@ -76,7 +77,6 @@ class _VerifyYourEmailScreenState extends State<VerifyYourEmailScreen>
                 CheckEmailVerificationState>(
               builder: (context, state) {
                 if (state is EmailVerified) {
-                  timer?.cancel(); // وقف التايمر
                   return Column(
                     children: [
                       Text(
@@ -201,9 +201,26 @@ class _VerifyYourEmailScreenState extends State<VerifyYourEmailScreen>
                     ),
                   );
                 }
-                return Text(
-                  'verification email has been sent to your email check out',
-                  style: TextStyle(color: Colors.white),
+                return Column(
+                  children: [
+                    Text(
+                      'The verification has been sent',
+                      textAlign: TextAlign.justify,
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16.sp),
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(
+                      'Check your Email now',
+                      textAlign: TextAlign.justify,
+                      style: GoogleFonts.poppins(
+                          color: Colors.red,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16.sp),
+                    ),
+                  ],
                 );
               },
             ),

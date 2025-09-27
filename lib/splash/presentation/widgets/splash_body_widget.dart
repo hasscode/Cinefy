@@ -20,15 +20,15 @@ class SplashBodyWidget extends StatelessWidget {
 
 
           children: [
-            SizedBox(height: 320.h,),
+            SizedBox(height: 335.h,),
             FadeIn(duration: Duration(milliseconds: 1000), child: Image.asset(AppImages.logoImage,width: 250.w)),
             Spacer(),
-            FadeIn(delay: Duration(milliseconds: 1200), child: Text('"Escape into Cinema"',style: GoogleFonts.gabriela(
+            FadeIn(delay: Duration(milliseconds: 100), child: Text('"Escape into Cinema"',style: GoogleFonts.poppins(
               fontSize: 16.sp,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
               color: Colors.white,
             ),)),
-            SizedBox(height: 70.h,),
+            SizedBox(height: 40.h,),
           ],
         ),
       ),

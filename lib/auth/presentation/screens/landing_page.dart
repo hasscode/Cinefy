@@ -19,9 +19,9 @@ backgroundColor: Colors.black,
       body: Stack(
         children: [
           SizedBox(
-            width: double.infinity.w,
-            height: double.infinity.h,
-            child: Image.asset(AppImages.starsBackgroundImage,fit: BoxFit.cover,),
+            width: double.infinity,
+            height: double.infinity,
+            child: Image.asset(AppImages.starsBackgroundImageBlur,fit: BoxFit.cover,),
           ),
 
           Positioned(
@@ -46,7 +46,7 @@ backgroundColor: Colors.black,
           ),
           Positioned(
             left: 60.w,
-            top: 350.h,
+            top: 380.h,
             child: FadeIn(
               delay: Duration(milliseconds: 900),
               child: SizedBox(
@@ -75,6 +75,7 @@ backgroundColor: Colors.black,
                     duration: const Duration(milliseconds: 300),
                     child: LoginScreen(),
                   ));},colorButton: Color(0xff9C231D),colorText: Colors.white,),
+                  SizedBox(height: 20.h,),
                 ],
               ),
             ),

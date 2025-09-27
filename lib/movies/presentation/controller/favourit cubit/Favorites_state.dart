@@ -1,3 +1,5 @@
+import '../../../domain/entities/movie.dart';
+
 abstract class FavoritesState {}
 
 class FavoritesInitial extends FavoritesState {}
@@ -21,10 +23,18 @@ class DeleteFavoritesFailure extends FavoritesState {
 // Get
 class GetFavoritesLoading extends FavoritesState {}
 class GetFavoritesSuccess extends FavoritesState {
-  final List<Map<String, dynamic>> favorites; // أو List<MovieModel>
+  final List<Movie> favorites; // أو List<MovieModel>
   GetFavoritesSuccess(this.favorites);
 }
 class GetFavoritesFailure extends FavoritesState {
   final String message;
   GetFavoritesFailure(this.message);
+}
+
+//check if exist
+class MovieExist extends FavoritesState{}
+class MovieNotExist extends FavoritesState{}
+class CheckFailure extends FavoritesState{
+  final String message;
+  CheckFailure(this.message);
 }

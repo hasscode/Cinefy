@@ -23,7 +23,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
-
+  bool obscurePassword = true;
   final GlobalKey<FormState> formKey = GlobalKey();
   @override
   void dispose() {
@@ -67,6 +67,12 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               obscureText: true,
               title: 'Password',
               hintText: 'Enter your password',
+              isPassword: true,
+              onTogglePassword: (){
+                setState(() {
+                  obscurePassword = !obscurePassword;
+                });
+              },
             ),
           ),
           SizedBox(height: 34),

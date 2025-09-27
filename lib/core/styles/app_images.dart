@@ -7,4 +7,6 @@ class AppImages{
   static const String personImage = 'assets/images/person_image.png';
   static const String movieImage = 'assets/images/movie.jpg';
   static const String noConnectionImage = 'assets/images/noConnection.png';
+  static const String noResultsImage = 'assets/images/noResults.png';
+  static const String noFavoritesImage = 'assets/images/no_favorites.png';
 }

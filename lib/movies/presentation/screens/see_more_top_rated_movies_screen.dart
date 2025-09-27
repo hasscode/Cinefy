@@ -31,12 +31,12 @@ class _SeeMoreTopRatedMoviesScreenState extends State<SeeMoreTopRatedMoviesScree
       create: (context) => sL<MoviesBloc>()..add(GetTopRatedMovies(1)),
       child: Scaffold(
         appBar: AppBar(
-          elevation: 10,
+          elevation: 0,
           backgroundColor: Colors.black,
           title: Text(
             widget.title,
             style: GoogleFonts.poppins(
-              fontSize: 16.5,
+              fontSize: 17.5,
               fontWeight: FontWeight.bold,
               color: const Color(0xffBFBFBF),
             ),

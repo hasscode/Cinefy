@@ -20,9 +20,9 @@ class MovieModel extends Movie {
           [],
       title: json['title'],
       backdropPath: json['backdrop_path']??'',
-      overview: json['overview'],
-      voteAvg: (json['vote_average']).toDouble() ,
-      releaseDate: json['release_date'],
+      overview: json['overview']??'',
+      voteAvg: (json['vote_average']??0).toDouble()??0 ,
+      releaseDate: json['release_date']??'',
     );
   }
 }

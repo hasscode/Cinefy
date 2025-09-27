@@ -59,5 +59,20 @@ return result;
   return await movieBaseRemoteDataSource.addToFavourites(movieID, movieName, moviePoster);
   }
 
+  @override
+  Future<Either<Failures, Unit>> removeFromFavourites(int movieID) async{
+return await movieBaseRemoteDataSource.removeFromFavourites(movieID);
+  }
+
+  @override
+  Future<bool> isExistInFavorites(int movieID) async{
+    return await movieBaseRemoteDataSource.isExistInFavorites(movieID);
+  }
+
+  @override
+  Future<Either<Failures, List<Movie>>> getFavoriteMovies() async{
+    return await movieBaseRemoteDataSource.getFavoriteMovies();
+  }
+
 
 }

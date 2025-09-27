@@ -58,7 +58,22 @@ class _SearchScreenState extends State<SearchScreen> {
                        }
                        else if (state is SearchSuccess){
                          if(state.fullSearchResponse.movies.isEmpty){
-                           return Center(child: Text('No Results',style: TextStyle(color: Colors.red),));
+                           return Column(
+                             children: [
+                               SizedBox(height: 100.h,),
+                               Image.asset(AppImages.noResultsImage,width: 200.w,),
+                               SizedBox(height: 20.h,),
+                               Text(
+                                 'No Results',
+                                 style: GoogleFonts.poppins(
+                                   fontWeight: FontWeight.w600,
+                                   fontSize: 17.5.sp,
+                                   color: Colors.white,
+                                 ),
+                               ),
+
+                             ],
+                           );
                          }
                          else{
                            return CustomScrollView(

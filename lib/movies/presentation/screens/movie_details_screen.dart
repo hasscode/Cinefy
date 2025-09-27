@@ -17,6 +17,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../core/services/services_locator.dart';
 import '../../../core/utils/dummy.dart';
+import '../controller/favourit cubit/Favorites_cubit.dart';
 import '../controller/movie_details_bloc/movie_details_bloc.dart';
 import '../controller/movie_details_bloc/movie_details_events.dart';
 import '../controller/movies_bloc/movies_bloc.dart';
@@ -29,8 +30,11 @@ class MovieDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return BlocProvider(
-      create: (context)=> sL<MovieDetailsBloc>()..add(GetMovieRecommendations(movieID)) ..add(GetMovieDetails(movieID))..add(GetMovieCredits(movieID)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context)=> sL<MovieDetailsBloc>()..add(GetMovieRecommendations(movieID)) ..add(GetMovieDetails(movieID))..add(GetMovieCredits(movieID)),),
+        BlocProvider(create: (context) => sL<FavoritesCubit>()..isExistInFavorites(movieID)),
+      ],
       child: Scaffold(
         backgroundColor: Color(0xff1E1E29),
         body: SafeArea(

@@ -25,7 +25,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
-
+  bool obscurePassword = true;
   final GlobalKey<FormState> formKey = GlobalKey();
   @override
   void dispose() {
@@ -55,9 +55,15 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: CustomTextFormField(
               textEditingController: passwordController,
-              obscureText: true,
+              obscureText: obscurePassword,
               title: 'Password',
               hintText: 'Enter your password',
+              isPassword: true,
+              onTogglePassword: (){
+                setState(() {
+                  obscurePassword = !obscurePassword;
+                });
+              },
             ),
           ),
           Padding(

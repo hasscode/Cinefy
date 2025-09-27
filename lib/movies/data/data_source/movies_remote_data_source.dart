@@ -19,12 +19,15 @@ abstract class MovieBaseRemoteDataSource{
   Future<Either<Failures, List<CreditModel>>>  getMovieCredits(int movieID);
   Future<Either<Failures, String>>  getMoviePlayer(int movieID);
   Future<Either<Failures, Unit>>  addToFavourites(int movieID,String movieName,String moviePoster);
+  Future<Either<Failures, Unit>>  removeFromFavourites(int movieID);
+  Future<bool>  isExistInFavorites(int movieID);
+  Future<Either<Failures, List<MovieModel>>> getFavoriteMovies();
 
 }
 class MovieRemoteDataSource implements MovieBaseRemoteDataSource {
   Dio dio;
 
-final CollectionReference usersCollection = FirebaseFirestore.instance.collection('Users');
+final  usersCollection = FirebaseFirestore.instance.collection('Users');
   MovieRemoteDataSource(this.dio);
 
   @override
@@ -162,16 +165,79 @@ try {
   Future<Either<Failures, Unit>> addToFavourites(int movieID,String movieName,String moviePoster) async{
     try {
       final String userId =  FirebaseAuth.instance.currentUser!.uid;
-      final result = await usersCollection.doc(userId).collection('favorites').add(
-          {
-            'movieID': movieID,
-            'movieName': movieName,
-            'moviePoster': moviePoster,
+      final snapshot = await usersCollection.doc(userId).collection('favorites').get();
+      final List<Map<String,dynamic>> userFavoriteMovies = snapshot.docs.map((doc) => doc.data()).toList();
+      bool exists = userFavoriteMovies.any((movie) => movie["movieID"] == movieID);
+      if(!exists){
+        final result = await usersCollection.doc(userId).collection('favorites').doc(movieID.toString()).set(
+            {
+              'id': movieID,
+              'title': movieName,
+              'backdrop_path': moviePoster,
 
-          });
+            });
+        return right(unit);
+      }
+      else {return left(ServerFailure('Already added to your favorites'));}
+
+
+    } on Exception catch (e) {
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failures, Unit>> removeFromFavourites(int movieID ) async{
+    try {
+      final String userId =  FirebaseAuth.instance.currentUser!.uid;
+      final snapshot = await usersCollection.doc(userId).collection('favorites').get();
+      final List<Map<String,dynamic>> userFavoriteMovies = snapshot.docs.map((doc) => doc.data()).toList();
+      bool exists = userFavoriteMovies.any((movie) => movie["id"] == movieID);
+      if(exists){
+        final result = await usersCollection.doc(userId).collection('favorites').doc(movieID.toString()).delete();
+        return right(unit);
+      }
+
       return right(unit);
     } on Exception catch (e) {
       return left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future< bool> isExistInFavorites(int movieID) async{
+    try {
+      final String userId =  FirebaseAuth.instance.currentUser!.uid;
+      final snapshot = await usersCollection.doc(userId).collection('favorites').get();
+      final List<Map<String,dynamic>> userFavoriteMovies = snapshot.docs.map((doc) => doc.data()).toList();
+      bool exists = userFavoriteMovies.any((movie) => movie["id"] == movieID);
+
+        return exists;
+
+    } on Exception catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+
+  @override
+  Future<Either<Failures, List<MovieModel>>> getFavoriteMovies() async {
+    try {
+      final String userId = FirebaseAuth.instance.currentUser!.uid;
+
+      final snapshot = await usersCollection
+          .doc(userId)
+          .collection('favorites')
+          .get();
+
+      final List<MovieModel> userFavoriteMovies = snapshot.docs
+          .map((doc) => MovieModel.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+
+      return right(userFavoriteMovies);
+    } on Exception catch (e) {
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
 }

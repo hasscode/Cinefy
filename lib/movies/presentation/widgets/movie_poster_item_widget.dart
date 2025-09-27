@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/styles/app_images.dart';
 import 'package:movie_app/movies/domain/entities/movie.dart';
@@ -8,6 +9,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/utils/constants.dart';
+import '../controller/favourit cubit/Favorites_cubit.dart';
 class MoviePosterItemWidget extends StatelessWidget {
   const MoviePosterItemWidget({super.key,required this.movie});
 final Movie movie;
@@ -21,7 +23,9 @@ final Movie movie;
          type: PageTransitionType.fade, // slideRight, slideLeft, scale, rotate...
          duration: const Duration(milliseconds: 300),
          child: MovieDetailsScreen(movieID: movie.id),
-       ));
+       )).then((_) {
+         BlocProvider.of<FavoritesCubit>(context).getFavoriteMovies();
+       });
 
 
         },
