@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,8 +46,14 @@ class _SearchScreenState extends State<SearchScreen> {
                        if(state is SearchInitial){
                          return Center(
                            child: Text(
+
                              'Type something to search...',
-                             style: TextStyle(color: Colors.white),
+                             style: GoogleFonts.poppins(
+
+                               fontWeight: FontWeight.w600,
+                               fontSize: 17.5.sp,
+                               color: Colors.white,
+                             ),
                            ),
                          );
                        }
@@ -76,88 +83,79 @@ class _SearchScreenState extends State<SearchScreen> {
                            );
                          }
                          else{
-                           return CustomScrollView(
-                             controller: scrollController,
-                             slivers: [
+                           return FadeIn(
+                             duration: Duration(milliseconds: 500),
+                             child: CustomScrollView(
+                               controller: scrollController,
+                               slivers: [
 
-                               SliverToBoxAdapter(child: SizedBox(height: 10)),
-                               // SliverToBoxAdapter(
-                               //   child: Center(
-                               //     child: Text(
-                               //       'Page $currentPage',
-                               //       style: GoogleFonts.poppins(
-                               //         fontSize: 20.sp,
-                               //
-                               //         fontWeight: FontWeight.w700,
-                               //         color: Color(0xffC5C5C5),
-                               //       ),
-                               //     ),
-                               //   ),
-                               // ),
-                               SliverToBoxAdapter(child: SizedBox(height: 10)),
-                               SliverList(
-                                 delegate: SliverChildBuilderDelegate(
-                                       (context, i) => Padding(
-                                     padding: const EdgeInsets.symmetric(
-                                       horizontal: 5,
-                                       vertical: 8,
-                                     ),
-                                     child: MovieInfoItemWidget(
-                                       movie: state.fullSearchResponse.movies[i],
-                                     ),
-                                   ),
-                                   childCount:state.fullSearchResponse.movies.length,
-                                 ),
-                               ),
-                               SliverToBoxAdapter(
-                                 child: Padding(
-                                   padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                                   child: Row(
-                                     children: [
-                                       Text(
-                                         'Pages :',
-                                         style: GoogleFonts.poppins(
-                                           fontSize: 13.5.sp,
+                                 SliverToBoxAdapter(child: SizedBox(height: 10)),
+                                 SliverList(
 
-                                           fontWeight: FontWeight.w600,
-                                           color: Color(0xffC5C5C5),
-                                         ),
+                                   delegate: SliverChildBuilderDelegate(
+
+                                         (context, i) => Padding(
+                                       padding: const EdgeInsets.symmetric(
+                                         horizontal: 5,
+                                         vertical: 8,
                                        ),
+                                       child: MovieInfoItemWidget(
+                                         movie: state.fullSearchResponse.movies[i],
+                                       ),
+                                     ),
+                                     childCount:state.fullSearchResponse.movies.length,
+                                   ),
+                                 ),
+                                 SliverToBoxAdapter(
+                                   child: Padding(
+                                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                                     child: Row(
+                                       children: [
+                                         Text(
+                                           'Pages :',
+                                           style: GoogleFonts.poppins(
+                                             fontSize: 13.5.sp,
 
-                                       Expanded(
-                                         child: SizedBox(
-                                           height: 55.h,
-                                           child: ListView.builder(
-                                             scrollDirection: Axis.horizontal,
-                                             itemCount: state.fullSearchResponse.numberOfPages,
-                                             itemBuilder: (context, i) => Padding(
-                                               padding: const EdgeInsets.symmetric(
-                                                 horizontal: 5,
-                                                 vertical: 8,
-                                               ),
-                                               child: PageNumberButtonWidget(
-                                                 onPageSelected: (pn) {
-                                                   context.read<SearchCubit>().getMoviesBySearch(
-                                                      searchController.text,
-                                                      pn
-                                                   );
-                                                   setState(() {
-                                                     currentPage = pn;
-                                                   });
-                                                 },
-                                                 isSelected: (i+1)==currentPage,
-                                                 scrollController: scrollController,
-                                                 pageNumber: i + 1,
+                                             fontWeight: FontWeight.w600,
+                                             color: Color(0xffC5C5C5),
+                                           ),
+                                         ),
+
+                                         Expanded(
+                                           child: SizedBox(
+                                             height: 55.h,
+                                             child: ListView.builder(
+                                               scrollDirection: Axis.horizontal,
+                                               itemCount: state.fullSearchResponse.numberOfPages,
+                                               itemBuilder: (context, i) => Padding(
+                                                 padding: const EdgeInsets.symmetric(
+                                                   horizontal: 5,
+                                                   vertical: 8,
+                                                 ),
+                                                 child: PageNumberButtonWidget(
+                                                   onPageSelected: (pn) {
+                                                     context.read<SearchCubit>().getMoviesBySearch(
+                                                        searchController.text,
+                                                        pn
+                                                     );
+                                                     setState(() {
+                                                       currentPage = pn;
+                                                     });
+                                                   },
+                                                   isSelected: (i+1)==currentPage,
+                                                   scrollController: scrollController,
+                                                   pageNumber: i + 1,
+                                                 ),
                                                ),
                                              ),
                                            ),
                                          ),
-                                       ),
-                                     ],
+                                       ],
+                                     ),
                                    ),
                                  ),
-                               ),
-                             ],
+                               ],
+                             ),
                            );
                          }
                        }

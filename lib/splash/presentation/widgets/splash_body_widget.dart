@@ -23,8 +23,8 @@ class SplashBodyWidget extends StatelessWidget {
             SizedBox(height: 335.h,),
             FadeIn(duration: Duration(milliseconds: 1000), child: Image.asset(AppImages.logoImage,width: 250.w)),
             Spacer(),
-            FadeIn(delay: Duration(milliseconds: 100), child: Text('"Escape into Cinema"',style: GoogleFonts.poppins(
-              fontSize: 16.sp,
+            FadeIn(delay: Duration(milliseconds: 100), child: Text('"Escape into Cinema"',style: GoogleFonts.oswald(
+              fontSize: 15.sp,
               fontWeight: FontWeight.w600,
               color: Colors.white,
             ),)),

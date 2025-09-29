@@ -12,6 +12,7 @@ import 'package:movie_app/movies/presentation/screens/see_more_top_rated_movies_
 import 'package:movie_app/movies/presentation/widgets/home_app_bar_widget.dart';
 import 'package:movie_app/movies/presentation/widgets/now_playing_movies.dart';
 import 'package:movie_app/movies/presentation/widgets/popular_movies_widget.dart';
+import 'package:movie_app/movies/presentation/widgets/recommended_movies_widget.dart';
 import 'package:movie_app/movies/presentation/widgets/top_rated_movies_widget.dart';
 
 import 'package:shimmer/shimmer.dart';
@@ -32,7 +33,9 @@ class HomeScreen extends StatelessWidget {
         BlocProvider(create: (context) => sL<MoviesBloc>()
           ..add(GetNowPlayingMovies())
           ..add(GetPopularMovies(1))
-          ..add(GetTopRatedMovies(1)),),
+          ..add(GetTopRatedMovies(1))
+          ..add(GetRecommendationsForYou())
+          ,),
         BlocProvider(create: (context)=> LoginCubit(sL()))
       ],
 
@@ -51,9 +54,12 @@ class HomeScreen extends StatelessWidget {
                   children: [
           
                     NowPlayingMovies(),
-                    MoviesCategoryHeaderWidget(title: 'Popular',screen: SeeMorePopularMoviesScreen(title: 'Popular'),),
+
+                    MoviesCategoryHeaderWidget(title: 'Popular',screen: SeeMorePopularMoviesScreen(title: 'Popular'),isForYou: false),
                     PopularMoviesWidget(),
-                    MoviesCategoryHeaderWidget(title: 'Top Rated',screen: SeeMoreTopRatedMoviesScreen(title: 'Top Rated'),),
+                    MoviesCategoryHeaderWidget(title: 'For You',screen: SizedBox.shrink(),isForYou: true,),
+                    RecommendedMoviesWidget(),
+                    MoviesCategoryHeaderWidget(title: 'Top Rated',screen: SeeMoreTopRatedMoviesScreen(title: 'Top Rated'),isForYou: false),
                     TopRatedMoviesWidget(),
                      SizedBox(height: 50.0.h),
                   ],

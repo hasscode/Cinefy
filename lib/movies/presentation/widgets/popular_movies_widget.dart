@@ -7,7 +7,6 @@ import 'package:movie_app/movies/presentation/controller/movies_bloc/movies_stat
 import 'package:movie_app/movies/presentation/widgets/movie_poster_item_widget.dart';
 import 'package:movie_app/movies/presentation/widgets/movies_category_header_widget.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../core/utils/constants.dart';
 import '../../../core/utils/dummy.dart';
 import '../../../core/utils/enums/request_state_enum.dart';

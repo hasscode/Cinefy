@@ -28,6 +28,7 @@ import 'package:movie_app/movies/domain/usecase/get_movie_player_use_case.dart';
 import 'package:movie_app/movies/domain/usecase/get_movie_recommendation_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_play_now_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_popular_usecase.dart';
+import 'package:movie_app/movies/domain/usecase/get_recommendations_for_you_use_case.dart';
 import 'package:movie_app/movies/domain/usecase/get_top_rated_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/is_exist_in_favorites_use_case.dart';
 import 'package:movie_app/movies/presentation/controller/favourit%20cubit/Favorites_cubit.dart';
@@ -55,6 +56,7 @@ sL.registerFactory(()=>MoviesBloc(
   sL<GetPlayNowUseCase>(),
   sL<GetPopularUsecase>(),
   sL<GetTopRatedUseCase>(),
+  sL<GetRecommendationsForYouUseCase>()
 ));
 sL.registerFactory(()=>SignUpCubit(sL<CreateAccountUseCase>()));
 sL.registerFactory(()=>MovieDetailsBloc(sL<GetMovieDetailsUseCase>(),
@@ -75,6 +77,7 @@ sL.registerFactory(()=>FavoritesCubit(sL<AddMovieToFavoritesUseCase>(),sL<Remove
 
     /// UseCase
     sL.registerLazySingleton<GetPlayNowUseCase>(() => GetPlayNowUseCase(sL()));
+    sL.registerLazySingleton<GetRecommendationsForYouUseCase>(() => GetRecommendationsForYouUseCase(sL<BaseMoviesRepository>()));
     sL.registerLazySingleton<GetPopularUsecase>(() => GetPopularUsecase(sL()));
     sL.registerLazySingleton<GetTopRatedUseCase>(() => GetTopRatedUseCase(sL()));
     sL.registerLazySingleton<GetMovieRecommendationUseCase>(() => GetMovieRecommendationUseCase(sL()));

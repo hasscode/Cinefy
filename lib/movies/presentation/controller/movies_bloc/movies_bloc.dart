@@ -5,6 +5,7 @@ import 'package:movie_app/movies/domain/usecase/get_movie_details.dart';
 import 'package:movie_app/movies/domain/usecase/get_movie_recommendation_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_play_now_usecase.dart';
 import 'package:movie_app/movies/domain/usecase/get_popular_usecase.dart';
+import 'package:movie_app/movies/domain/usecase/get_recommendations_for_you_use_case.dart';
 import 'package:movie_app/movies/domain/usecase/get_top_rated_usecase.dart';
 
 import 'package:movie_app/movies/presentation/controller/movies_bloc/movies_state.dart';
@@ -15,12 +16,13 @@ class MoviesBloc extends Bloc <MoviesEvent ,MoviesState>{
   final GetPlayNowUseCase getNowPlaying;
   final GetPopularUsecase getPopular;
   final GetTopRatedUseCase getTopRated;
+  final GetRecommendationsForYouUseCase getRecommendationsForYouUseCase ;
 
-  MoviesBloc(this.getNowPlaying, this.getPopular, this.getTopRated) :super (MoviesState()){
+  MoviesBloc(this.getNowPlaying, this.getPopular, this.getTopRated,this.getRecommendationsForYouUseCase) :super (MoviesState()){
     on<GetNowPlayingMovies>(_getNowPlayingMovies);
     on<GetPopularMovies>(_getPopularMovies);
     on<GetTopRatedMovies>(_getTopRatedMovies);
-
+on<GetRecommendationsForYou>(_getRecommendedMovies);
   }
 
 Future<void>_getNowPlayingMovies(GetNowPlayingMovies event ,Emitter<MoviesState> emit)async{
@@ -75,7 +77,25 @@ Future<void>_getTopRatedMovies(GetTopRatedMovies event ,Emitter<MoviesState> emi
   });
 
 }
+  Future<void>_getRecommendedMovies(GetRecommendationsForYou event ,Emitter<MoviesState> emit)async{
 
+    final result = await getRecommendationsForYouUseCase.call();
+    result.fold((failure){
+      emit(
+          state.copyWith(
+              recommendedMoviesMessage: failure.errMessage,
+              recommendedMoviesState: RequestState.error
+          )
+      );
+
+    }, (movies){
+      emit(state.copyWith(
+          recommendedMoviesState: RequestState.success,
+          recommendedMovies: movies
+      ));
+    });
+
+  }
 
 
 }

@@ -6,9 +6,10 @@ import 'package:page_transition/page_transition.dart';
 import '../../domain/entities/movie.dart';
 import '../screens/see_more_popular_movies_screen.dart';
 class MoviesCategoryHeaderWidget extends StatelessWidget {
-  const MoviesCategoryHeaderWidget({super.key,required this.title,required this.screen});
+  const MoviesCategoryHeaderWidget({super.key,required this.title,required this.screen,required this.isForYou});
 final String title ;
   final Widget screen;
+  final bool isForYou;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +27,7 @@ final String title ;
               letterSpacing: 0.15,
             ),
           ),
-          TextButton(
+          isForYou ?SizedBox(height: 50.h,):TextButton(
             style: TextButton.styleFrom(
               overlayColor: Color(0xffD10909)
             ),

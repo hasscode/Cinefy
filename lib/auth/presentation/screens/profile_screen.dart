@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/auth/presentation/controller/check%20logged%20cubit/check_logged_cubit.dart';
 import 'package:movie_app/auth/presentation/controller/check%20logged%20cubit/check_logout_state.dart';
+import 'package:movie_app/auth/presentation/controller/reset%20password%20cubit/reset_password_cubit.dart';
 import 'package:movie_app/core/services/services_locator.dart';
 import 'package:movie_app/core/styles/app_images.dart';
 import 'package:movie_app/auth/presentation/widgets/profile_options_widget.dart';
@@ -14,7 +15,8 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-       BlocProvider(create:  (context)=> sL<CheckLoggedCubit>()..checkAuthStatus())
+       BlocProvider(create:  (context)=> sL<CheckLoggedCubit>()..checkAuthStatus()),
+       BlocProvider(create:  (context)=> sL<ResetPasswordCubit>())
       ],
       child: Scaffold(
         appBar: AppBar(

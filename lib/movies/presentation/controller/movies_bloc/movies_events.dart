@@ -8,3 +8,6 @@ abstract class MoviesEvent{}
   GetTopRatedMovies(this.pageNumber);
   int pageNumber;
  }
+class GetRecommendationsForYou extends MoviesEvent{
+
+}

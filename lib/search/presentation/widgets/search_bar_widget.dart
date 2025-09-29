@@ -29,7 +29,7 @@ final int currentPage ;
       backgroundColor: MaterialStateProperty.all(Color(0xffF8F8F8)),
       trailing: [Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Icon(CupertinoIcons.search,color: Color(0xff8A0000),size: 28,),
+        child: Icon(CupertinoIcons.search,color: Color(0xff8A0000),size: 32,),
       )],
     onChanged: (text) {
     if (text.isNotEmpty) {

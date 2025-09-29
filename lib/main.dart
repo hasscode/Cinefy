@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => sL<CheckEmailVerificationCubit>()),
           BlocProvider(create: (context) => sL<SendEmailVerificationCubit>()),
           BlocProvider(create: (context) => sL<DeleteAccountCubit>()),
+          BlocProvider(create: (context) => sL<FavoritesCubit>()..getFavoriteMovies()),
 
 
         ],

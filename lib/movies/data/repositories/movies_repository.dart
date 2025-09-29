@@ -74,5 +74,10 @@ return await movieBaseRemoteDataSource.removeFromFavourites(movieID);
     return await movieBaseRemoteDataSource.getFavoriteMovies();
   }
 
+  @override
+  Future<Either<Failures, List<Movie>>> getRecommendationsForYou() async{
+return await movieBaseRemoteDataSource.getRecommendationsForYou();
+  }
+
 
 }

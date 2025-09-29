@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/auth/presentation/controller/reset%20password%20cubit/reset_password_cubit.dart';
 import 'package:movie_app/auth/presentation/screens/check_your_email_screen.dart';
 import 'package:movie_app/auth/presentation/screens/login_screen.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../../../core/widgets/custom_button_widget.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
@@ -56,9 +57,10 @@ class _ResetPasswordFormWidgetState extends State<ResetPasswordFormWidget> {
                     ),
                   );
                 } else if (state is ResetPasswordSuccess) {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => CheckYourEmailScreen()),
+                    PageTransition(type: PageTransitionType.leftToRight,duration: Duration(milliseconds: 300),child:  CheckYourEmailScreen() )
+                  ,(route)=>false
                   );
                 }
               },

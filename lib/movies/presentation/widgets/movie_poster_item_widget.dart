@@ -23,9 +23,7 @@ final Movie movie;
          type: PageTransitionType.fade, // slideRight, slideLeft, scale, rotate...
          duration: const Duration(milliseconds: 300),
          child: MovieDetailsScreen(movieID: movie.id),
-       )).then((_) {
-         BlocProvider.of<FavoritesCubit>(context).getFavoriteMovies();
-       });
+       ));
 
 
         },

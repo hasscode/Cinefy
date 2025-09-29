@@ -16,8 +16,8 @@ class CheckYourEmailScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Container(
-          width: double.infinity.w,
-          height: double.infinity.h,
+          width: double.infinity,
+          height: double.infinity,
           decoration: BoxDecoration(
         
             image: DecorationImage(image: AssetImage(AppImages.starsBackgroundImage),fit: BoxFit.cover)

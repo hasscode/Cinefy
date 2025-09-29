@@ -64,7 +64,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: CustomTextFormField(
               textEditingController: passwordController,
-              obscureText: true,
+              obscureText: obscurePassword,
               title: 'Password',
               hintText: 'Enter your password',
               isPassword: true,

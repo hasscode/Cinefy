@@ -1,40 +1,35 @@
+import 'package:equatable/equatable.dart';
 import '../../../domain/entities/movie.dart';
 
-abstract class FavoritesState {}
+enum FavoritesStatus { initial, loading, success, failure }
 
-class FavoritesInitial extends FavoritesState {}
+class FavoritesState extends Equatable {
+  final FavoritesStatus status;
+  final List<Movie> movies;
+  final Set<int> favoriteIds;
+  final String? errorMessage;
 
-// Add
-class AddFavoritesLoading extends FavoritesState {}
-class AddFavoritesSuccess extends FavoritesState {}
-class AddFavoritesFailure extends FavoritesState {
-  final String message;
-  AddFavoritesFailure(this.message);
-}
+  const FavoritesState({
+    this.status = FavoritesStatus.initial,
+    this.movies = const [],
+    this.favoriteIds = const {},
+    this.errorMessage,
+  });
 
-// Delete
-class DeleteFavoritesLoading extends FavoritesState {}
-class DeleteFavoritesSuccess extends FavoritesState {}
-class DeleteFavoritesFailure extends FavoritesState {
-  final String message;
-  DeleteFavoritesFailure(this.message);
-}
+  FavoritesState copyWith({
+    FavoritesStatus? status,
+    List<Movie>? movies,
+    Set<int>? favoriteIds,
+    String? errorMessage,
+  }) {
+    return FavoritesState(
+      status: status ?? this.status,
+      movies: movies ?? this.movies,
+      favoriteIds: favoriteIds ?? this.favoriteIds,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
+  }
 
-// Get
-class GetFavoritesLoading extends FavoritesState {}
-class GetFavoritesSuccess extends FavoritesState {
-  final List<Movie> favorites; // أو List<MovieModel>
-  GetFavoritesSuccess(this.favorites);
-}
-class GetFavoritesFailure extends FavoritesState {
-  final String message;
-  GetFavoritesFailure(this.message);
-}
-
-//check if exist
-class MovieExist extends FavoritesState{}
-class MovieNotExist extends FavoritesState{}
-class CheckFailure extends FavoritesState{
-  final String message;
-  CheckFailure(this.message);
+  @override
+  List<Object?> get props => [status, movies, favoriteIds, errorMessage];
 }
