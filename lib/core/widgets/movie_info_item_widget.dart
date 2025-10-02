@@ -39,7 +39,7 @@ class MovieInfoItemWidget extends StatelessWidget {
                 width: 90.w,
                 height: 150.h,
                 fit: BoxFit.cover,
-                imageUrl: movie.backdropPath!='https://image.tmdb.org/t/p/w500'? Constants.imageUrl(movie.backdropPath!):AppImages.movieImage,
+                imageUrl: movie.backdropPath!='https://image.tmdb.org/t/p/w500'? Constants.imageUrl(movie.posterPath!):AppImages.movieImage,
                 placeholder: (context, url) => Shimmer.fromColors(
                   baseColor: Colors.grey[850]!,
                   highlightColor: Colors.grey[800]!,

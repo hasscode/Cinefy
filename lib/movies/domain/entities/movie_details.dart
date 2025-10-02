@@ -4,6 +4,7 @@ import 'geners.dart';
 
 class MovieDetails extends Equatable {
   final String backdropPath;
+  final String posterPath;
   final List<Genres> genres;
   final int id;
   final String overview;
@@ -14,6 +15,7 @@ class MovieDetails extends Equatable {
   final int voteCount;
 
   const MovieDetails({
+    required this.posterPath,
     required this.voteCount,
     required this.backdropPath,
     required this.genres,
@@ -35,6 +37,7 @@ class MovieDetails extends Equatable {
     runtime,
     title,
     voteAverage,
-    voteCount
+    voteCount,
+    posterPath
   ];
 }

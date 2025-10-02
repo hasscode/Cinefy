@@ -35,6 +35,7 @@ class MovieDetailsState extends Equatable {
       runtime: 0,
       title: 'title',
       voteAverage: 0,
+      posterPath: ''
     ),
     this.movieDetailsRequest = RequestState.loading,
     this.movieDetailsMessage = '',

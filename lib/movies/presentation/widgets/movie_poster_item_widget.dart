@@ -40,7 +40,7 @@ final Movie movie;
 
               width: 120.0.w,
               fit: BoxFit.cover,
-              imageUrl:movie.backdropPath!='https://image.tmdb.org/t/p/w500'? Constants.imageUrl(movie.backdropPath!):AppImages.movieImage,
+              imageUrl: Constants.imageUrl(movie.posterPath!),
               placeholder: (context, url) => Shimmer.fromColors(
                 baseColor: Colors.grey[850]!,
                 highlightColor: Colors.grey[800]!,

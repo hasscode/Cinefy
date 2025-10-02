@@ -138,7 +138,7 @@ class MovieDetailsWidget extends StatelessWidget {
                                           .addMovieToFavorites(
                                         movieDetails.id,
                                         movieDetails.title,
-                                        movieDetails.backdropPath,
+                                        movieDetails.posterPath,
                                       );
 
                                       ScaffoldMessenger.of(context)

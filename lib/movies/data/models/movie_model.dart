@@ -2,6 +2,7 @@ import 'package:movie_app/movies/domain/entities/movie.dart';
 
 class MovieModel extends Movie {
   const MovieModel({
+    required super.posterPath,
     required super.id,
     required super.genreIds,
     required super.title,
@@ -20,6 +21,7 @@ class MovieModel extends Movie {
           [],
       title: json['title'],
       backdropPath: json['backdrop_path']??'',
+      posterPath: json['poster_path']??'',
       overview: json['overview']??'',
       voteAvg: (json['vote_average']??0).toDouble()??0 ,
       releaseDate: json['release_date']??'',

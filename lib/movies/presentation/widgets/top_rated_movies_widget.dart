@@ -26,7 +26,7 @@ class TopRatedMoviesWidget extends StatelessWidget {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              itemCount: moviesList.length,
+              itemCount: state.topRatedMovies.length,
               itemBuilder: (context, i) {
                 return MoviePosterItemWidget(movie: state.topRatedMovies[i]);
               },

@@ -210,7 +210,7 @@ class MovieRemoteDataSource implements MovieBaseRemoteDataSource {
             .set({
               'id': movieID,
               'title': movieName,
-              'backdrop_path': moviePoster,
+              'poster_path': moviePoster,
             });
         return right(unit);
       } else {
